@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const User = require('./models/User');
 const passport = require('passport');
-const { register , registerUpdate , registerComplete} = require('./controller/userController');
 const { check ,validationResult } = require('express-validator');
+const { register , registerUpdate , registerComplete , account} = require('./controller/userController');
+
 
 
 
@@ -18,6 +19,7 @@ const userRegistrationValidation = [
     check('password' ,'Password is required').not().isEmpty(),
   ]
 
+
   const checkLoginField = (req,res,next)=>{
     const errors = validationResult(req)
     if(!errors.isEmpty()){
@@ -31,7 +33,7 @@ const userRegistrationValidation = [
 
 
 router.get('/', function(req, res, next) {
-    res.render('main/test');
+    res.render('main/home');
   });
 
 
@@ -65,5 +67,11 @@ router.post('/register-Complete', userRegistrationValidation, registerComplete)
     req.session.destroy();
     return res.redirect('/');
   });
+
+  router.get('/account' , (req,res,next) => {
+      res.render('auth/account')
+  })
+
+  router.post('/account', account)
 
   module.exports = router;

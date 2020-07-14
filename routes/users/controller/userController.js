@@ -126,8 +126,55 @@ module.exports = {
         catch(err){
            return res.render('error' , {errors: err})
         }
-    }
+    },
 
+    account: async (req, res,next) => {
+      const {fName , lName, email, password ,  nPassword , retypeNPassword} = req.body
+      const back = '/api/v1/users/account'
+
+    
+
+      try {
+        let user = await User.findOne({email: req.user.email})
+        const newEmail = await User.findOne({email})
+        const match = await bcrypt.compare(password, user.password)
+
+        if(newEmail){
+          req.flash('errors' , 'Email Already Registered')
+          return res.redirect(back)
+        }
+
+        if(!match){
+          req.flash('errors' , 'Invalid Password')
+          return res.redirect(back)
+        }
+        if(nPassword !== retypeNPassword){
+          req.flash('errors' , 'New Password Need to Match')
+          return res.redirect(back)
+        }
+
+        user.name = fName ? `${fName} ${lName}` : user.name
+        user.email = email ? email : user.email
+        if(password && nPassword && retypeNPassword){
+          if(nPassword.length < 6){
+            req.flash('errors' , 'New Password Must be 6 Character Long')
+            return res.redirect(back)
+          }
+            user.password = nPassword
+        }
+        await user.save()
+        req.flash('success' , 'Account Updated')
+        return res.redirect(back)
+      }
+
+       catch(err){
+        console.log(err)
+      }
+
+
+
+
+   }
 
 
 
