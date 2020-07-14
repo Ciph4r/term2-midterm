@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/head %> 
+  <title>
+    Registration - Lose It
+  </title>
+</head>
+
+<body class="landing-page sidebar-collapse">
+    <% include ../partials/navbar %> 
+  <div class="page-header header-filter" data-parallax="true" style="background-color: lightskyblue; height: 400px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 mx-auto">
+              <h1 class="mb-5">Complete Your Registration to get started</h1>
+            </div>
+            <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+
+                <% if (errors.length) { %>
+         
+                    <div class = 'alert alert-danger alert-dismissable'>
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <%= errors %>
+                    </div>
+                     <% } %>
+
+                     <% if (success.length) { %>
+         
+                        <div class = 'alert alert-success alert-dismissable'>
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                        <%= success %>
+                        </div>
+                         <% } %>
+                   
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+  
+  <div class="main main-raised">
+    <div class="container">
+      <div class="section text-center">
+        <div class="row">
+          <div class="col-md-8 ml-auto mr-auto">
+            <h2 class="title">Fill Out Below</h2>
+
+
+            <form role="form" method="POST" action="/api/v1/users/register-Complete">
+                <div class="form-group bmd-form-group">
+                    <label class="bmd-label-floating">Fist Name</label>
+                    <input type="text" name="fName" id="fName"class="form-control" >
+                </div>
+                <div class="form-group bmd-form-group">
+                    <label class="bmd-label-floating">Last Name</label>
+                    <input type="text" name="lName" id="lName"class="form-control" >
+                </div>
+                <div class="form-group bmd-form-group">
+                    <label class="bmd-label-floating">Password</label>
+                    <input type="password" name="password" id="password"class="form-control" >
+                </div>
+                <div class="form-group bmd-form-group">
+                    <label class="bmd-label-floating">Retype Your Password</label>
+                    <input type="password" name="retypePassword" id="retypePassword" class="form-control">
+                </div>
+                <div class="col-12 col-md-3">
+                    <button type="submit" class="btn btn-block btn-lg btn-primary ">Complete!</button>
+                </div>
+                <input type="hidden" name="tempPassword" id="tempPassword" value="<%=password %>"/>
+                <input type="hidden" name="tempName" id="tempName" value="<%=name %>"/>
+              </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <% include ../partials/footer %> 
+  <% include ../partials/script %> 
+  
+</body>
+
+</html>
