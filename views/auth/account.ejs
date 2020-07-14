@@ -46,40 +46,39 @@
   
   <div class="main main-raised">
     <div class="container">
-      <div class="section text-center">
+      <div class="section ">
         <div class="row">
           <div class="col-md-8 ml-auto mr-auto">
-            <h2 class="title">Your Acount Infomation</h2>
+            <h2 class="title text-center">Your Acount Infomation</h2>
 
-            <form role="form" method="POST" action="/api/v1/users/account">
+            <form role="form" method="POST" action="/api/v1/users/account?_method=PUT">
                 <div class="form-group bmd-form-group">
-                    <label class="bmd-label-floating">Fist Name</label>
-                    <input type="text" name="fName" id="fName"class="form-control" placeholder="<%= user.name.split(' ')[0] %> " >
+                    <label class="bmd-label-floating">Fist Name:</label>
+                    <input type="text" name="fName" id="fName"class="form-control text-center"  placeholder="<%= user.name.split(' ')[0] %> " >
                 </div>
                 <div class="form-group bmd-form-group">
-                    <label class="bmd-label-floating">Last Name</label>
-                    <input type="text" name="lName" id="lName"class="form-control" placeholder="<%= user.name.split(' ')[1] %>" >
+                    <label class="bmd-label-floating">Last Name:</label>
+                    <input type="text" name="lName" id="lName"class="form-control text-center" placeholder="<%= user.name.split(' ')[1] %>" >
                 </div>
                 <div class="form-group bmd-form-group">
-                    <label class="bmd-label-floating">Email</label>
-                    <input type="email" name="email" id="email"class="form-control" placeholder="<%= user.email %>" >
+                    <label class="bmd-label-floating">Email:</label>
+                    <input type="email" name="email" id="email"class="form-control text-center" placeholder="<%= user.email %>" >
                 </div>
                 <div class="form-group bmd-form-group">
                     <label class="bmd-label-floating">Password</label>
-                    <input type="password" name="password" id="password"class="form-control" >
+                    <input type="password" name="password" id="password"class="form-control text-center" >
                 </div>
                 <div class="form-group bmd-form-group">
                     <label class="bmd-label-floating">New Password</label>
-                    <input type="password" name="nPassword" id="nPassword" class="form-control">
+                    <input type="password" name="nPassword" id="nPassword" class="form-control text-center">
                 </div>
                 <div class="form-group bmd-form-group">
                     <label class="bmd-label-floating">Retype Your New Password</label>
-                    <input type="password" name="retypeNPassword" id="retypeNPassword" class="form-control">
+                    <input type="password" name="retypeNPassword" id="retypeNPassword" class="form-control text-center">
                 </div>
-                <div class="col-12 col-md-3">
-                    <button type="submit" class="btn btn-block btn-lg btn-primary ">UPDATE!</button>
+                <div class="col-md-6 offset-md-3">
+                    <button type="submit" class="btn btn-block btn-lg btn-primary">UPDATE!</button>
                 </div>
-
               </form>
 
         </div>

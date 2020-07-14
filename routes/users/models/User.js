@@ -14,7 +14,8 @@ const UserSchema = new mongoose.Schema({
     userInfo: {
         gender: {type:String, default:""},
         birthday: {type:String, default:""},
-        height: {type:String, default:""},
+        height: {type:Number, default:""},
+        activityLV: {type:String, default:''},
         tdde: {type:String, default:""},
         bmr: {type:String, default:""},
         weight: {type:Array},

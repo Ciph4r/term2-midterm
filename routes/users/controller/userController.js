@@ -5,6 +5,7 @@ require('dotenv').config()
 const mailjet = require('node-mailjet')
   .connect(process.env.MAILKEY, process.env.MAILSECRET)
 const { check , validationResult } = require('express-validator');
+const moment = require('moment')
 
 
 
@@ -174,7 +175,29 @@ module.exports = {
    },
 
    profile: async (req,res,next) => {
-     
+    const {gender , birthday, ftHeight, inchHeight, weight ,  activityLV } = req.body
+    const back = '/api/v1/users/profile'
+     try {
+      let user = await User.findOne({email: req.user.email})
+      user.userInfo.gender = gender
+      user.userInfo.birthday = birthday
+      user.userInfo.height = (ftHeight*12) + (inchHeight * 1)
+      user.userInfo.weight.push({
+        date: moment().format("YYYY-MM-DD , h:mm:ss a"),
+        weight:weight
+      })
+      user.userInfo.activityLV = activityLV
+      user.userInfo.userInfo = true
+      user.goal.currentWeight = weight
+
+
+
+      console.log(user)
+     }
+     catch(err){
+      console.log(err)
+     }
+
    }
 
 

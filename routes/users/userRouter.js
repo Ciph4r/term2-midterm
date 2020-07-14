@@ -2,18 +2,11 @@ const express = require('express');
 const router = express.Router();
 const User = require('./models/User');
 const passport = require('passport');
-const { check ,validationResult } = require('express-validator');
+const { check , validationResult } = require('express-validator');
 const { register , registerUpdate , registerComplete , account , profile} = require('./controller/userController');
+const auth = require('../middleware/auth')
 
 
-const auth = (req, res, next) => {
-    if (req.isAuthenticated()) {
-      next();
-    } else {
-        req.flash('errors', 'You Need to be Logged In to view this page')
-        return res.render('error')
-    }
-  };
 
 const userRegistrationValidation = [
     check('fName' ,'First Name is required').not().isEmpty(),
@@ -40,19 +33,19 @@ const userRegistrationValidation = [
 
 
 router.get('/', function(req, res, next) {
-    res.render('main/home');
+    return res.render('main/home');
   });
 
 
 router.post('/register' , register);
 
 router.get('/register-update/:name/:password' , registerUpdate)
-router.post('/register-Complete', userRegistrationValidation, registerComplete)
+router.put('/register-Complete', userRegistrationValidation, registerComplete)
 
 
   router.get('/login' ,  (req,res,next) => {
     if (req.isAuthenticated()){
-      res.redirect(301,'/')
+      return res.redirect(301,'/')
     }
     return res.render('main/login')
   })
@@ -75,15 +68,16 @@ router.post('/register-Complete', userRegistrationValidation, registerComplete)
     return res.redirect('/');
   });
 
-  router.get('/account' , auth, (req,res,next) => {
-      res.render('auth/account')
+router.get('/account' , auth, (req,res,next) => {
+      return res.render('auth/account')
   })
 
-  router.post('/account', auth , account)
+router.put('/account', auth , account)
 
-  router.get('/profile' , auth , (req,res,next) => {
-    res.render('auth/profile')
+ router.get('/profile' , auth , (req,res,next) => {
+    return res.render('auth/profile')
 })
+router.put('/profile' , auth , profile)
 
 
   module.exports = router;
