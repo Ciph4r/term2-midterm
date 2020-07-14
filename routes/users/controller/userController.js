@@ -171,9 +171,10 @@ module.exports = {
         console.log(err)
       }
 
+   },
 
-
-
+   profile: async (req,res,next) => {
+     
    }
 
 

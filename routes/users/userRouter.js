@@ -3,10 +3,17 @@ const router = express.Router();
 const User = require('./models/User');
 const passport = require('passport');
 const { check ,validationResult } = require('express-validator');
-const { register , registerUpdate , registerComplete , account} = require('./controller/userController');
+const { register , registerUpdate , registerComplete , account , profile} = require('./controller/userController');
 
 
-
+const auth = (req, res, next) => {
+    if (req.isAuthenticated()) {
+      next();
+    } else {
+        req.flash('errors', 'You Need to be Logged In to view this page')
+        return res.render('error')
+    }
+  };
 
 const userRegistrationValidation = [
     check('fName' ,'First Name is required').not().isEmpty(),
@@ -68,10 +75,15 @@ router.post('/register-Complete', userRegistrationValidation, registerComplete)
     return res.redirect('/');
   });
 
-  router.get('/account' , (req,res,next) => {
+  router.get('/account' , auth, (req,res,next) => {
       res.render('auth/account')
   })
 
-  router.post('/account', account)
+  router.post('/account', auth , account)
+
+  router.get('/profile' , auth , (req,res,next) => {
+    res.render('auth/profile')
+})
+
 
   module.exports = router;
