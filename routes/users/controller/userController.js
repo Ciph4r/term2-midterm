@@ -209,7 +209,7 @@ module.exports = {
      }
 
    },
-   profileEdit: async(req,res,next) =>{
+   profileEdit: async (req,res,next) =>{
     
     try{
       return res.render('auth/profileEdit')
@@ -217,6 +217,9 @@ module.exports = {
     catch(err){
       console.log(err)
     }
+   },
+
+   addGOal: async (req,res,next) => {
 
    }
 

@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require('./models/User');
 const passport = require('passport');
 const { check , validationResult } = require('express-validator');
-const { register , registerUpdate , registerComplete , account , profile , profileEdit} = require('./controller/userController');
+const { register , registerUpdate , registerComplete , account , profile , profileEdit , addGoal} = require('./controller/userController');
 const auth = require('../middleware/auth')
 
 
@@ -89,6 +89,7 @@ router.get('/profileEdit' ,auth , (req,res,next) => {
 router.get('/add-goal', auth,(req,res,next) => {
   res.render('auth/addGoal')
 })
+router.put('add-goal',auth , addgoal)
 
 
   module.exports = router;
