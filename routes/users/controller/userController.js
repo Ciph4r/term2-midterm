@@ -219,7 +219,13 @@ module.exports = {
     }
    },
 
-   addGOal: async (req,res,next) => {
+   addGoal: async (req,res,next) => { 
+     try{
+
+     }
+     catch(err){
+       
+     }
 
    }
 
