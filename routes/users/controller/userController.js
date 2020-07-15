@@ -208,6 +208,16 @@ module.exports = {
       console.log(err)
      }
 
+   },
+   profileEdit: async(req,res,next) =>{
+    
+    try{
+      return res.render('auth/profileEdit')
+    }
+    catch(err){
+      console.log(err)
+    }
+
    }
 
 

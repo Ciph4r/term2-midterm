@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/head %> 
+  <title>
+    Profile - Lose It
+  </title>
+</head>
+
+<body class="landing-page sidebar-collapse">
+    <% include ../partials/navbar %> 
+  <div class="page-header header-filter" data-parallax="true" style="background-color: lightskyblue; height: 400px;">
+    <div class="container">
+        <div class="row">
+            <% if (user.userInfo.userInfo) { %>
+                <div class="col-xl-9 mx-auto" style="text-align: center;">
+                    <h1 class="mb-5">PROFILE</h1>
+                  </div>
+            <% } %>
+            <% if (!user.userInfo.userInfo) { %>
+                <div class="col-xl-9 mx-auto" style="text-align: center;">
+                    <h1 class="mb-5">Complete Your Profile to get Started</h1>
+                  </div>
+            <% } %>
+ 
+
+            <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+
+                <% if (errors.length) { %>
+                    <div class = 'alert alert-danger alert-dismissable'>
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <%= errors %>
+                    </div>
+                     <% } %>
+
+                     <% if (success.length) { %>
+                        <div class = 'alert alert-success alert-dismissable'>
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                        <%= success %>
+                        </div>
+                         <% } %>
+                   
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+  
+  <div class="main main-raised">
+    <div class="container">
+      <div class="section">
+        <div class="row">
+          <div class="col-md-8 ml-auto mr-auto">
+            <h2 class="title text-center">Fill Out Below</h2>
+
+              <form role="form" method="POST" action="/api/v1/users/profile?_method=PUT">
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select class="form-control selectpicker" data-style="btn btn-link" id="gender" name="gender">
+                      <option>Male</option>
+                      <option>Female</option>
+                      <option>Dont Wish To Answer</option>
+                    </select>
+                  </div>
+                <div class="form-group bmd-form-group">
+                    <label class="bmd-label-floating">Birthday:</label>
+                    <input type="date" name="birthday" id="birthday"class="form-control text-center" min='1920-01-01' max="2000-13-13">
+                </div>
+                <div class="form-group bmd-form-group row">
+                    <label for="gender">Height</label>
+                    <div>
+                        <input type="number" name="ftHeight" id="ftHeight"class="form-control text-center" min="4" max="8" placeholder="Feet">
+                    </div>
+                    <div>
+                        <input type="number" name="inchHeight" id="inchHeight"class="form-control text-center" min="0" max="12" placeholder="Inches">
+                    </div>
+                   
+                </div>
+                <div class="form-group bmd-form-group">
+                    <label class="bmd-label-floating">Weight</label>
+                    <input type="number" name="weight" id="weight"class="form-control text-center" min="50" max="800" placeholder="Weight in LB">
+                </div>
+                <div class="form-group">
+                    <label for="activityLV">Activity Level</label>
+                    <select class="form-control selectpicker" data-style="btn btn-link" id="activityLV" name="activityLV">
+                      <option>Sedentary</option>
+                      <option>Lightly Active</option>
+                      <option>Moderately Active</option>
+                      <option>Very Active</option>
+                      <option>Extremely Active</option>
+                    </select>
+                  </div>
+                <div class="col-md-6 offset-md-3">
+                    <button type="submit" class="btn btn-block btn-lg btn-primary">UPDATE!</button>
+                </div>
+              </form>
+         
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <% include ../partials/footer %>
+  <script src="/javascripts/birthday.js"></script>
+  <% include ../partials/script %> 
+  
+</body>
+
+</html>

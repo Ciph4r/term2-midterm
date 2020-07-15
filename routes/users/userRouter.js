@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require('./models/User');
 const passport = require('passport');
 const { check , validationResult } = require('express-validator');
-const { register , registerUpdate , registerComplete , account , profile} = require('./controller/userController');
+const { register , registerUpdate , registerComplete , account , profile , profileEdit} = require('./controller/userController');
 const auth = require('../middleware/auth')
 
 
@@ -75,9 +75,16 @@ router.get('/account' , auth, (req,res,next) => {
 router.put('/account', auth , account)
 
  router.get('/profile' , auth , (req,res,next) => {
+   if (!req.user.userInfo.userInfo){
+    return res.render('auth/profileUpdate')
+   }
     return res.render('auth/profile')
 })
 router.put('/profile' , auth , profile)
+
+router.get('/profileEdit' ,auth , (req,res,next) => {
+  return res.render('auth/profileUpdate')
+})
 
 
   module.exports = router;
