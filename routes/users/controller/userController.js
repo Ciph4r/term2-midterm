@@ -6,6 +6,8 @@ const mailjet = require('node-mailjet')
   .connect(process.env.MAILKEY, process.env.MAILSECRET)
 const { check , validationResult } = require('express-validator');
 const moment = require('moment')
+const {bmrCalc , tdeeCalc} = require('../helper/bmrTddeCalc')
+const birthdayCalc = require('../helper/birhdayCalc')
 
 
 
@@ -86,6 +88,7 @@ module.exports = {
                         }
                     }
                 }
+                
                 return res.render('error' , {errors: 'THIS PAGE NO LONGER EXIST'})
         }
         catch(err){
@@ -189,10 +192,17 @@ module.exports = {
       user.userInfo.activityLV = activityLV
       user.userInfo.userInfo = true
       user.goal.currentWeight = weight
+  
+      const date = birthday.split('-')
+      const age = birthdayCalc(new Date(Number(date[0]), Number(date[1]), Number(date[2])))
+      user.userInfo.bmr = bmrCalc(gender , age , (weight*1) / 2.205, user.userInfo.height *2.54)
+      user.userInfo.userInfo = true
+      user.userInfo.tdee = tdeeCalc(user.userInfo.bmr , activityLV)
+      
+      await user.save()
+      req.flash('success' , 'Profile Updated')
+      return res.redirect(back)
 
-
-
-      console.log(user)
      }
      catch(err){
       console.log(err)

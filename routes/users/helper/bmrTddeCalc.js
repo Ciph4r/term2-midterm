@@ -4,8 +4,7 @@
 
 
 module.exports = {
-  const bmrCalc: (gender , age , weightInKg, heightInCm) => {
-    let result = 0
+   bmrCalc: (gender , age , weightInKg, heightInCm) => {
     if (gender === "Female"){
         let femaleBmr = 655 + (9.6 * weightInKg) + (1.8 * heightInCm);
         bmr = (femaleBmr) - (4.7 * age);
@@ -19,7 +18,26 @@ module.exports = {
       }
   },
 
-  const tddeCalc : () => {
-    
+   tdeeCalc : (bmr,activity) => {
+    let tdee = 0
+      switch(activity) {
+        case "Sedentary":
+          tdee = Math.round(bmr * 1.2)
+          break;
+        case "Lightly Active":
+          tdee = Math.round(bmr * 1.375)
+          break;
+        case "Moderately Active":
+          tdee = Math.round(bmr * 1.55)
+          break;
+        case "Very Active":
+          tdee = Math.round(bmr * 1.725)
+          break;
+        case "Extremely Active":
+          tdee = Math.round(bmr * 1.9)
+          break;
+      }
+    return tdee
   }
+
 }

@@ -16,13 +16,13 @@ const UserSchema = new mongoose.Schema({
         birthday: {type:String, default:""},
         height: {type:Number, default:""},
         activityLV: {type:String, default:''},
-        tdde: {type:String, default:""},
+        tdee: {type:String, default:""},
         bmr: {type:String, default:""},
         weight: {type:Array},
         userInfo: {type:Boolean , default:false}
     },
     goal:{
-        currentWeight: {type:String, default: ""},
+        currentWeight: {type:Number, default: ""},
         targetWeight: {type: String, default: ""},
         complete:{type:Boolean, default: false},
         pastGoal: {type: Array}

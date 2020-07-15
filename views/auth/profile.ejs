@@ -58,8 +58,8 @@
           <div class="col-md-8 ml-auto mr-auto">
             <h2 class="title text-center">Fill Out Below</h2>
 
-
-            <form role="form" method="POST" action="/api/v1/users/profile?_method=PUT">
+            <% if (!user.userInfo.userInfo) { %>
+              <form role="form" method="POST" action="/api/v1/users/profile?_method=PUT">
                 <div class="form-group">
                     <label for="gender">Gender</label>
                     <select class="form-control selectpicker" data-style="btn btn-link" id="gender" name="gender">
@@ -100,6 +100,8 @@
                     <button type="submit" class="btn btn-block btn-lg btn-primary">UPDATE!</button>
                 </div>
               </form>
+            <% } %>
+
 
         </div>
       </div>
