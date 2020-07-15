@@ -13,16 +13,7 @@
   <div class="page-header header-filter" data-parallax="true" style="background-color: lightskyblue; height: 400px;">
     <div class="container">
         <div class="row">
-            <% if (user.userInfo.userInfo) { %>
-                <div class="col-xl-9 mx-auto" style="text-align: center;">
-                    <h1 class="mb-5">PROFILE</h1>
-                  </div>
-            <% } %>
-            <% if (!user.userInfo.userInfo) { %>
-                <div class="col-xl-9 mx-auto" style="text-align: center;">
-                    <h1 class="mb-5">Complete Your Profile to get Started</h1>
-                  </div>
-            <% } %>
+
  
 
             <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
@@ -56,7 +47,7 @@
       <div class="section">
         <div class="row">
           <div class="col-md-8 ml-auto mr-auto">
-            <h2 class="title text-center">Fill Out Below</h2>
+            <h2 class="title text-center">Fill Your Goal Below</h2>
 
               <form role="form" method="POST" action="/api/v1/users/profile?_method=PUT">
                 <div class="form-group">

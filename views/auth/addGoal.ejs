@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/head %> 
+  <title>
+    ADD NEW GOAL - Lose It
+  </title>
+</head>
+
+<body class="landing-page sidebar-collapse">
+    <% include ../partials/navbar %> 
+  <div class="page-header header-filter" data-parallax="true" style="background-color: lightskyblue; height: 400px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+                <div class="col-xl-9 mx-auto">
+                    <h1 class="mb-5">Add A New Goal</h1>
+                  </div>
+                <% if (errors.length) { %>
+                    <div class = 'alert alert-danger alert-dismissable'>
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <%= errors %>
+                    </div>
+                     <% } %>
+
+                     <% if (success.length) { %>
+                        <div class = 'alert alert-success alert-dismissable'>
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                        <%= success %>
+                        </div>
+                         <% } %>
+    
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+  
+  <div class="main main-raised">
+    <div class="container">
+      <div class="section">
+        <div class="row">
+          <div class="col-md-8 ml-auto mr-auto">
+            <h2 class="title text-center">Fill Out Below</h2>
+
+              <form role="form" method="POST" action="/api/v1/users/add-goal?_method=PUT">
+                <div class="form-group">
+
+                        <div class="info text-center">
+                          <h4 class="info-title">Your Last Weigh in</h4>
+                          <h5><%= user.goal.currentWeight %> </h5>
+                        </div>
+                      
+                        <div class="form-group bmd-form-group col-md-6 offset-md-3">
+                            <label class="bmd-label-floating">Your Weight</label>
+                            <input type="number" name="weight" id="weight" class="form-control">
+                        </div>
+                                              
+                        <div class="form-group bmd-form-group col-md-6 offset-md-3">
+                            <label class="bmd-label-floating">Your Goal</label>
+                            <input type="number" name="targetWeight" id="targetWeight" class="form-control">
+                        </div> 
+
+
+                <div class="col-md-4 offset-md-4">
+                    <button type="submit" class="btn btn-block btn-lg btn-primary">ADD!</button>
+                </div>
+              </form>
+         
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <% include ../partials/footer %>
+  <script src="/javascripts/birthday.js"></script>
+  <% include ../partials/script %> 
+  
+</body>
+
+</html>

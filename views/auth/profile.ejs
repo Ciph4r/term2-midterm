@@ -13,17 +13,6 @@
   <div class="page-header header-filter" data-parallax="true" style="background-color: lightskyblue; height: 400px;">
     <div class="container">
         <div class="row">
-            <% if (user.userInfo.userInfo) { %>
-                <div class="col-xl-9 mx-auto" style="text-align: center;">
-                    <h1 class="mb-5">PROFILE</h1>
-                  </div>
-            <% } %>
-            <% if (!user.userInfo.userInfo) { %>
-                <div class="col-xl-9 mx-auto" style="text-align: center;">
-                    <h1 class="mb-5">Complete Your Profile to get Started</h1>
-                  </div>
-            <% } %>
- 
 
             <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
 
@@ -44,8 +33,8 @@
                         <%= success %>
                         </div>
                          <% } %>
-                   
             </div>
+            
           </div>
         </div>
       </div>
@@ -63,27 +52,36 @@
                 <div class="row">
                   <div class="col-md-8 ml-auto mr-auto">
                     <h2 class="title">Your Info</h2>
-                    <h4 class="info-title ">Name: <%= user.name %> </h4>
-                    <h4 class="info-title ">height: <%= user.userInfo.height %> inches </h4>
-                    <h4 class="info-title ">Birthday: <%= user.userInfo.birthday %> </h4>
-                    <h4 class="info-title ">TDEE: <%= user.userInfo.tdee %> </h4>
-                    <h4 class="info-title ">BMR: <%= user.userInfo.bmr %> </h4>
-                        <div class="col-md-6 offset-md-3">
-                            <button onclick="location.href='/api/v1/users/profileEdit'" class="btn btn-block btn-lg btn-primary">UPDATE!</button>
-                        </div>
-                     
-
+                      <div class="border">
+                        <h4 class="info-title ">Name: <%= user.name %> </h4>
+                        <h4 class="info-title ">height: <%= user.userInfo.height %> inches </h4>
+                        <h4 class="info-title ">Birthday: <%= user.userInfo.birthday %> </h4>
+                        <h4 class="info-title ">TDEE: <%= user.userInfo.tdee %> </h4>
+                        <h4 class="info-title ">BMR: <%= user.userInfo.bmr %> </h4>
+                            <div class="col-md-6 offset-md-3">
+                                <button onclick="location.href='/api/v1/users/profileEdit'" class="btn btn-block btn-lg btn-primary">EDIT!</button>
+                            </div>
+                      </div>
                   </div>
+
                 </div>
-                <div class="features">
+                <div class="">
                   <div class="row">
                     <div class="col-md-4">
                       <div class="info">
                         <div class="icon icon-info">
                           <i class="material-icons">chat</i>
                         </div>
-                        <h4 class="info-title">placeholder</h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                        <h4 class="info-title">Goal</h4>
+                        
+                        <% if (!user.goal.complete) { %>
+                         <h5>You Do not Have A Weight Goal</h5>
+                         <div class="">
+                            <button onclick="location.href='/api/v1/users/add-goal'" class="btn btn-block btn-lg btn-primary">Add Goal</button>
+                        </div>
+                        <% } %>
+                        
+
                       </div>
                     </div>
                     <div class="col-md-4">

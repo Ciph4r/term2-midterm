@@ -86,5 +86,9 @@ router.get('/profileEdit' ,auth , (req,res,next) => {
   return res.render('auth/profileUpdate')
 })
 
+router.get('/add-goal', auth,(req,res,next) => {
+  res.render('auth/addGoal')
+})
+
 
   module.exports = router;
