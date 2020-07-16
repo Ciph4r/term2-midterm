@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/head %> 
+  <title>
+    Diet Plan - Lose It
+  </title>
+</head>
+
+<body class="landing-page sidebar-collapse">
+    <% include ../partials/navbar %> 
+  <div class="page-header header-filter" data-parallax="true" style="background-color: lightskyblue; height: 400px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+                <div class="col-xl-9 mx-auto">
+                    <h1 class="mb-5 text-center">Diet</h1>
+                  </div>
+                <% if (errors.length) { %>
+                    <div class = 'alert alert-danger alert-dismissable'>
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <%= errors %>
+                    </div>
+                     <% } %>
+
+                     <% if (success.length) { %>
+                        <div class = 'alert alert-success alert-dismissable'>
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                        <%= success %>
+                        </div>
+                         <% } %>
+    
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+  
+  <div class="main main-raised">
+    <div class="container">
+      <div class="section">
+                       
+        <div class="row">
+
+
+
+          <div class="col-md-8 ml-auto mr-auto">
+
+          <div class="col-md-4 offset-4">
+            <div class=" offset-md-">
+              <button onclick="location.href='/api/v1/dietPlan/add-meal'" class="btn btn-block btn-lg btn-primary">Add New Meal!</button>
+          </div>
+          </div>
+
+
+
+
+
+
+
+
+          <!-- <div class="col-md-4">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title">Yesterdays Meal</h4>
+                <p class="category">Category subtitle</p>
+              </div>
+              <div class="card-body">
+                The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona...
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title">Todays Meal</h4>
+                <p class="category">Category subtitle</p>
+              </div>
+              <div class="card-body">
+                The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona...
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title">Tommorrows Meal</h4>
+                <p class="category">Category subtitle</p>
+              </div>
+              <div class="card-body">
+                The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona...
+              </div>
+            </div>
+          </div> -->
+
+        </div>
+
+
+    </div>
+  </div>
+ 
+  <% include ../partials/footer %>
+  <% include ../partials/script %> 
+  
+</body>
+
+</html>

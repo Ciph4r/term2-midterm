@@ -47,44 +47,47 @@
                        
         <div class="row">
 
-          <div class="col-md-4">
-            <div class="card">
-              <div class="card-header">
-                <h4 class="card-title">Yesterdays Meal</h4>
-                <p class="category">Category subtitle</p>
+
+          <div class="col-md-8 ml-auto mr-auto">
+
+
+            <h2 class="title text-center">Fill Below</h2>
+
+            <form role="form" method="POST" action="/api/v1/users/profile?_method=PUT">
+              <div class="form-group bmd-form-group">
+                  <label class="bmd-label-floating">Day for Meal:</label>
+                  <input type="date" name="mealDate" id="mealDate"class="form-control text-center" min='2020-01-01' >
               </div>
-              <div class="card-body">
-                The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona...
+              <div class="form-group bmd-form-group row offset-5">
+                  <label for="mealNum">Number of Meal</label>
+                  <div class="col-md-3">
+                      <input type="number" name="mealNum" id="mealNum"class="form-control text-center" min="1" max="15" placeholder="0" >
+                  </div>
               </div>
+
+              <div class="form-group bmd-form-group offset-5" id="mealArea">
+                    
+
+
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card">
-              <div class="card-header">
-                <h4 class="card-title">Todays Meal</h4>
-                <p class="category">Category subtitle</p>
+            <input type="hidden" name="mealQuantity" id="mealQuantity" value="1" />
+              <div class="col-md-6 offset-md-3">
+                  <button type="submit" class="btn btn-block btn-lg btn-primary">UPDATE!</button>
               </div>
-              <div class="card-body">
-                The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona...
-              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card">
-              <div class="card-header">
-                <h4 class="card-title">Tommorrows Meal</h4>
-                <p class="category">Category subtitle</p>
-              </div>
-              <div class="card-body">
-                The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona...
-              </div>
-            </div>
-          </div>
+            </form>
+       
+
+
+
+      </div>
+
 
         </div>
+
+
     </div>
   </div>
- 
+  <script src="/javascripts/mealNumber.js"></script>
   <% include ../partials/footer %>
   <% include ../partials/script %> 
   

@@ -11,7 +11,7 @@ require('dotenv').config()
 
 
 router.get('/' , (req,res,next) => {
-    return res.render('auth/addDiet')
+    return res.render('auth/diet')
 })
 
 // router.post('/add-diet' , async (req,res,next) => {
@@ -27,7 +27,7 @@ router.get('/' , (req,res,next) => {
 //////////////////////////////////////   test routes
 router.get('/findfood' , async (req,res,next) => {
     try {
-        const search = req.body.search.split(' ').join('%')
+        const search = req.body.search.split(' ').join('%20')
         const response = await axios.get(`https://api.edamam.com/api/food-database/v2/parser?ingr=${search}&app_id=${process.env.FOOD_ID}&app_key=${process.env.FOOD_KEY}`)
        
         console.log(response.data)
@@ -36,6 +36,12 @@ router.get('/findfood' , async (req,res,next) => {
     catch(err) {
     console.log(err)
     }
+})
+
+//////////////////////////
+
+router.get('/add-meal' , (re,res,next) => {
+    return res.render('auth/addMeals')
 })
 
 // router.post('/findfood' , (req,res,next) => {
