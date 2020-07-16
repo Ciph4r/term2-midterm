@@ -16,6 +16,7 @@ require('./lib/passport');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users/userRouter');
+const dietPlanRouter = require('./routes/dietPlan/dietPlanRouter')
 
 const app = express();
 
@@ -70,6 +71,8 @@ app.use((req,res,next) => {
 ////////////////
 app.use('/', indexRouter);
 app.use('/api/v1/users', usersRouter);
+app.use('/api/v1/dietPlan', dietPlanRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

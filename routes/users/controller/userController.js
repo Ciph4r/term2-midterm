@@ -228,10 +228,16 @@ module.exports = {
         user.goal.pastGoal.push(
           {
             date: moment().format('MMMM Do YYYY, h:mm:ss a'),
-            endGoalWeight: user.userInfo.weight,
+            endGoalWeight: user.goal.currentWeight,
             targetWeight: user.goal.targetWeight,
           }
         )
+        if(user.goal.pastGoal.length > 0){
+          user.userInfo.weight.push({
+            date: moment().format("YYYY-MM-DD , h:mm:ss a"),
+            weight:currentWeight
+          })
+        }
       }
       
       user.goal.targetWeight = req.body.targetWeight
