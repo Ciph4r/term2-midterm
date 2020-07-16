@@ -34,7 +34,7 @@
                         </div>
                          <% } %>
             </div>
-            
+
           </div>
         </div>
       </div>
@@ -80,7 +80,16 @@
                             <button onclick="location.href='/api/v1/users/add-goal'" class="btn btn-block btn-lg btn-primary">Add Goal</button>
                         </div>
                         <% } %>
-                        
+                        <% if (user.goal.complete) { %>
+                            <div class="border">
+                                <h4 class="info-title ">Current Goal: <%= user.goal.targetWeight %> LB</h4>
+                                <h4 class="info-title ">BMR: <%= user.userInfo.bmr %> </h4>
+                                    <div class=" offset-md-">
+                                        <button onclick="location.href='/api/v1/users/profileEdit'" class="btn btn-block btn-lg btn-primary">Add New Goal!</button>
+                                    </div>
+                              </div>
+                           <% } %>
+
 
                       </div>
                     </div>
