@@ -220,11 +220,29 @@ module.exports = {
    },
 
    addGoal: async (req,res,next) => { 
+     
      try{
-
+      console.log('jj')
+      let user = await User.findOne({email: req.user.email})
+      if(user.goal.complete){
+        user.goal.pastGoal.push(
+          {
+            date: moment().format('MMMM Do YYYY, h:mm:ss a'),
+            endGoalWeight: user.userInfo.weight,
+            targetWeight: user.goal.targetWeight,
+          }
+        )
+      }
+      
+      user.goal.targetWeight = req.body.targetWeight
+      user.goal.currentWeight = req.body.weight
+      user.goal.complete = true
+      await user.save()
+      req.flash('success' , 'Goal Updated')
+      return res.redirect('/api/v1/users/profile')
      }
      catch(err){
-       
+        console.log(err)
      }
 
    }
