@@ -53,7 +53,7 @@
 
             <h2 class="title text-center">Fill Below</h2>
 
-            <form role="form" method="POST" action="/api/v1/users/profile?_method=PUT">
+            <form role="form" method="POST" action="/api/v1/dietPlan/add-diet">
               <div class="form-group bmd-form-group">
                   <label class="bmd-label-floating">Day for Meal:</label>
                   <input type="date" name="mealDate" id="mealDate"class="form-control text-center" min='2020-01-01' >
@@ -72,7 +72,7 @@
             </div>
             <input type="hidden" name="mealQuantity" id="mealQuantity" value="1" />
               <div class="col-md-6 offset-md-3">
-                  <button type="submit" class="btn btn-block btn-lg btn-primary">UPDATE!</button>
+                  <button type="submit" class="btn btn-block btn-lg btn-primary">ADD</button>
               </div>
             </form>
        

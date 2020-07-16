@@ -40,14 +40,13 @@ router.get('/findfood' , async (req,res,next) => {
 
 //////////////////////////
 
-router.get('/add-meal' , (re,res,next) => {
-    return res.render('auth/addMeals')
+router.post('/add-diet' , async (re,res,next) => {
+
+
+  
 })
 
-// router.post('/findfood' , (req,res,next) => {
 
-
-// })
 
 
   module.exports = router;

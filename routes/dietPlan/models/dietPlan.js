@@ -6,11 +6,11 @@ const DietPlanSchema = new mongoose.Schema({
     owner:{type: Schema.Types.ObjectId , ref: 'User'},
     meals: [
         {
-            meal: { type: Schema.Types.ObjectId, ref: 'Meal' }
+            meals: { type: Schema.Types.ObjectId, ref: 'Meal' }
         }
     ],
     
-    timestamp: {type:String , default: ()=> moment().format('MMMM Do YYYY, h:mm:ss a')}
+    date: {type:String}
 })
 
 module.exports = mongoose.model('DietPlan' , DietPlanSchema)
