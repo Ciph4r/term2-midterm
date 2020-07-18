@@ -1,7 +1,7 @@
 
 const mealNum = document.getElementById('mealNum')
 const mealArea = document.getElementById('mealArea')
-let mealQuantity =document.getElementById('mealQuantity').value
+let mealQuantity =document.getElementById('mealQuantity')
 
 const clearMealArea = () => {
     const select = document.getElementById('mealArea')
@@ -15,7 +15,7 @@ const clearMealArea = () => {
     mealNum.addEventListener('input' , (event) => {
         event.preventDefault()
         clearMealArea()
-        let num = 1
+        let num = 0
         for (let i = 0 ; i < mealNum.value ; i++){
             const createDiv = document.createElement('div')
             createDiv.setAttribute('class' , "col-md-3")
@@ -28,7 +28,7 @@ const clearMealArea = () => {
             mealArea.appendChild(createDiv)
             num++
         }
-        mealQuantity = num
+        mealQuantity.value = num
     })
 
 

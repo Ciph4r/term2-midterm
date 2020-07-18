@@ -6,7 +6,7 @@ const DietPlanSchema = new mongoose.Schema({
     owner:{type: Schema.Types.ObjectId , ref: 'User'},
     meals: [
         {
-            meals: { type: Schema.Types.ObjectId, ref: 'Meal' }
+            meals: { type: Schema.Types.ObjectId, ref: 'Meals' }
         }
     ],
     
