@@ -53,23 +53,29 @@ router.post('/add-diet' , async (req,res,next) => {
 
         dietPlan.meals.push(meals)
 
-        for (let i = 0 ; i < req.body.mealQuantity ; i++){
-            const meal = {
-             time: req.body.mealTime + i    
-            }
+        // for (let i = 0 ; i < req.body.mealQuantity ; i++){
+        //     const meal = {
+        //      time: req.body.mealTime + i    
+        //     }
            
-            meals.meal.push(meal)
-            console.log(req.body[mealTime0])
-        }
+        //     meals.meal.push(meal)
+        //     console.log(req.body[mealTime0])
+        // }
         
         // console.log(dietPlan)
         // console.log(meals)
 
         // await dietPlan.save()
-        
+        ///////////////////////////////
 
-
-
+        const meal = await  {
+                 time: req.body.mealTime0  
+                }
+                console.log(meals)
+                meals.meal.push(meal)
+                await meals.save()
+                await dietPlan.save()
+                return res.redirect('/api/v1/dietPlan/show-meals/'+ meals._id)
     }
     catch (err){
         console.log(err)
@@ -81,11 +87,15 @@ router.get('/add-meal' , (req,res,next) => {
     return res.render('auth/addMeals')
 })
 
-router.post('add-meal' ,(req,res,next) => {
-    const mealQuantity = res.body.mealQuantity
-    console.log(mealQuantity)
-})
+router.get('/show-meals/:meals_id' , (req,res,next) => {
+       
+        Meals.findOne({_id : req.params.meals_id}).then((foundMeals) => {
+            
+            return res.render('auth/meals' , {meals: foundMeals.meal})
+        })
+        
 
+})
 
 
 
