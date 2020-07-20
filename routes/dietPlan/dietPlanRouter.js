@@ -14,7 +14,20 @@ require('dotenv').config()
 
 
 router.get('/' , (req,res,next) => {
-    return res.render('auth/diet')
+    DietPlan.find({owner: req.user._id}).then((foundDiet) => {
+        if (foundDiet){
+            return res.render('auth/diet' , {diet: foundDiet})
+        }else {
+            return res.render('auth/diet')
+        }
+        
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+ 
+
+
 })
 
 // router.post('/add-diet' , async (req,res,next) => {
@@ -28,18 +41,7 @@ router.get('/' , (req,res,next) => {
 //     }
 // })
 //////////////////////////////////////   test routes
-router.get('/findfood' , async (req,res,next) => {
-    try {
-        const search = req.body.search.split(' ').join('%20')
-        const response = await axios.get(`https://api.edamam.com/api/food-database/v2/parser?ingr=${search}&app_id=${process.env.FOOD_ID}&app_key=${process.env.FOOD_KEY}`)
-       
-        console.log(response.data)
-            return res.send(response.data)   
-    }
-    catch(err) {
-    console.log(err)
-    }
-})
+
 
 //////////////////////////
 
@@ -88,15 +90,36 @@ router.get('/add-meal' , (req,res,next) => {
 })
 
 router.get('/show-meals/:meals_id' , (req,res,next) => {
-       
         Meals.findOne({_id : req.params.meals_id}).then((foundMeals) => {
             
-            return res.render('auth/meals' , {meals: foundMeals.meal})
+            return res.render('auth/meals' , {meals: foundMeals.meal} )
         })
+        .catch((err) => console.log(err))
         
 
 })
 
+
+router.get('/food-search' ,(req,res,next) => {
+    let data = []
+    return res.render('auth/foodSearch', {data})
+})
+
+router.post('/findfood' , async (req,res,next) => {
+    try {
+        console.log(req.body.search)
+        const search = req.body.search.split(' ').join('%20')
+        const response = await axios.get(`https://api.edamam.com/api/food-database/v2/parser?ingr=${search}&app_id=${process.env.FOOD_ID}&app_key=${process.env.FOOD_KEY}`)
+        let data = await response.data
+        // console.log(response.data)
+        return res.render('auth/foodSearch' , {data: data})
+        
+            return res.send(response.data)   
+    }
+    catch(err) {
+    console.log(err)
+    }
+})
 
 
   module.exports = router;
