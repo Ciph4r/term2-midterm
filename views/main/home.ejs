@@ -81,10 +81,47 @@
             <% } %>
             <% if (user.userInfo.userInfo) { %>
               <div class="section text-center">
-
-                
                 <div class="row">
 
+                  <% if (weighIn.length) { %>
+                    
+                    <div class="col-md-4">
+                      <div class="card">
+                        <div class="card-header">
+                          <h4 class="card-title"><%= weighIn %> </h4>
+                        </div>
+                        <div class="card-body">
+                          
+                          <form role="form" method="POST" action="/api/v1/users/weigh-in?_method=PUT">
+                            <div class="form-group bmd-form-group">
+                                <input type="number" name="weight" id="weight"class="form-control text-center" min="50" max="800" placeholder="Weight in LB">
+                            </div>
+                            <div class="col-md-6 offset-md-3">
+                                <button type="submit" class="btn btn-block btn-sm btn-primary">UPDATE!</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  
+
+                    
+                     <% } %>
+
+                  <div class="col-md-4">
+                    <div class="card">
+                      <div class="card-header">
+                        <h4 class="card-title">Regular header</h4>
+                        <p class="category">Category subtitle</p>
+                      </div>
+                      <div class="card-body">
+                        The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona...
+                      </div>
+                    </div>
+                  </div>
+
+
+
                   <div class="col-md-4">
                     <div class="card">
                       <div class="card-header">
@@ -97,18 +134,7 @@
                     </div>
                   </div>
                   <div class="col-md-4">
-                    <div class="card">
-                      <div class="card-header">
-                        <h4 class="card-title">Regular header</h4>
-                        <p class="category">Category subtitle</p>
-                      </div>
-                      <div class="card-body">
-                        The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona...
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="card">
+                    <div class="card" >
                       <div class="card-header">
                         <h4 class="card-title">Regular header</h4>
                         <p class="category">Category subtitle</p>
@@ -130,9 +156,46 @@
                   <% if (!user) { %>
                     <div class="section text-center">
                         <div class="row">
-                          <div class="col-md-8 ml-auto mr-auto">
-                            <h2 class="title">placeholder</h2>
-                            <h5 class="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</h5>
+                          <div class="col-md-8 ml-auto mr-auto" style="height: 250px;">
+                            <h2 class="title">What People Are Eating</h2>
+                            <div id="" class="carousel slide" data-ride="carousel">
+                  
+                              <div class="carousel-inner">
+                                <div class="carousel-item active" >
+                                  <div class="card-body" style="height: 250px;">
+                                    <h5 class="card-title"></h5>
+                                  <% for( let i = 0; i < recentDiet[0].length; i++ ) { %>
+                                      <p class="card-text">
+                                        <%= recentDiet[0][i].name %>
+                                      </p>
+                                      
+                                  <% } %>
+                                </div>
+                                </div>
+                                <div class="carousel-item">
+                                  <div class="card-body" style="height: 250px;">
+                                    <h5 class="card-title"></h5>
+                                  <% for( let i = 0; i < recentDiet[0].length; i++ ) { %>
+                                      <p class="card-text">
+                                        <%= recentDiet[0][i].name %>
+                                      </p>
+                                      
+                                  <% } %>
+                                </div>
+                                </div>
+                                <div class="carousel-item">
+                                  <div class="card-body" style="height: 250px;">
+                                    <h5 class="card-title"></h5>
+                                  <% for( let i = 0; i < recentDiet[0].length; i++ ) { %>
+                                      <p class="card-text">
+                                        <%= recentDiet[0][i].name %>
+                                      </p>
+                                      
+                                  <% } %>
+                                </div>
+                                </div>
+                              </div>
+                            </div>
                           </div>
                         </div>
                         <div class="features">

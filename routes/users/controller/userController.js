@@ -235,7 +235,7 @@ module.exports = {
         if(user.goal.pastGoal.length > 0){
           user.userInfo.weight.push({
             date: moment().format("YYYY-MM-DD , h:mm:ss a"),
-            weight:currentWeight
+            weight: user.userInfo.currentWeight
           })
         }
       }
@@ -250,8 +250,23 @@ module.exports = {
      catch(err){
         console.log(err)
      }
-
-   }
+   },
+   weighIn: async (req,res,next) => {
+    try {
+      let user = await User.findOne({email: req.user.email})
+      user.userInfo.weight.push({
+        date: moment().format("YYYY-MM-DD , h:mm:ss a"),
+        weight:user.goal.currentWeight
+      })
+      user.goal.currentWeight = req.body.weight
+      await user.save()
+      req.flash('success' , 'Weight Updated')
+      return res.redirect('back')
+    }
+    catch(err){
+      console.log(err)
+    }
+  }
 
 
 

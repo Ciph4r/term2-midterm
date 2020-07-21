@@ -18,12 +18,16 @@ const searchValidation = [
     check('search' ,'Search Input is required').not().isEmpty(),
   ]
 
+  const dietValidation = [
+    check('mealDate' ,'Date is required').not().isEmpty(),
+    check('mealNum' ,'Meal Number is required').not().isEmpty()
+  ]
 
 
 
 router.get('/' , (req,res,next) => {
     DietPlan.find({owner: req.user._id}).then((foundDiet) => {
-        console.log(foundDiet)
+        
         if (foundDiet){
             return res.render('auth/diet' , {diet: foundDiet})
         }else {
@@ -39,8 +43,19 @@ router.get('/' , (req,res,next) => {
 
 })
 
-router.post('/add-diet' , async (req,res,next) => {
+router.post('/add-diet' , dietValidation, async (req,res,next) => {
+    const errors = validationResult(req)
+    if(!errors.isEmpty()){
+        req.flash('errors' , errors.array()[0].msg)
+        return res.redirect('back')
+  
+    }
     try {
+        let diet = await DietPlan.find({date: req.body.mealDate })
+        if (diet.length){
+            req.flash('errors' , " this date already exist")
+            return res.redirect('back')
+        }
         let dietPlan = await new DietPlan()
         dietPlan.owner = req.user._id
         dietPlan.date = req.body.mealDate
@@ -99,6 +114,11 @@ router.get('/findfood', searchValidation ,async (req,res,next) => {
   
         const search = req.query.search.split(' ').join('%20')
         const response = await axios.get(`https://api.edamam.com/api/food-database/v2/parser?ingr=${search}&app_id=${process.env.FOOD_ID}&app_key=${process.env.FOOD_KEY}`)
+            if(!response.data.parsed.length){
+                req.flash('errors', `CANT FIND ${req.query.search}`)
+                return res.redirect('back')
+            }
+       
         let data = await response.data
         return res.render('auth/foodSearch' , {data: data , foundMeal})
       
@@ -132,9 +152,8 @@ router.put('/add-food' , (req,res,next) => {
 router.put('/remove-item/:meal_id' , async (req,res,next) => {
     try {
         let meal = await Meals.findOne({_id:req.params.meal_id })
-        console.log(req.body.index)
         meal.items.splice(req.body.index,1)
-        console.log(meal)
+        
         await meal.save()
         req.flash('success' , 'Item Remove')
         res.redirect('back')

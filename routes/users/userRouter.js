@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require('./models/User');
 const passport = require('passport');
 const { check , validationResult } = require('express-validator');
-const { register , registerUpdate , registerComplete , account , profile , profileEdit , addGoal} = require('./controller/userController');
+const { register , registerUpdate , registerComplete , account , profile , profileEdit , addGoal , weighIn} = require('./controller/userController');
 const auth = require('../middleware/auth')
 
 
@@ -91,6 +91,28 @@ router.get('/add-goal', auth,(req,res,next) => {
 })
 
 router.put('/add-goal',auth , addGoal)
+
+router.put('/weigh-in' , weighIn)
+
+
+// async (req,res,next) => {
+//   try {
+//     let user = await User.findOne({email: req.user.email})
+//     user.userInfo.weight.push({
+//       date: moment().format("YYYY-MM-DD , h:mm:ss a"),
+//       weight:user.goal.currentWeight
+//     })
+//     user.goal.currentWeight = req.body.weight
+//     await user.save()
+//     req.flash('success' , 'Weight Updated')
+//     return res.redirect('back')
+//   }
+//   catch(err){
+//     console.log(err)
+//   }
+
+
+// })
 
 
   module.exports = router;
