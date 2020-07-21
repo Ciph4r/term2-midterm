@@ -129,6 +129,21 @@ router.put('/add-food' , (req,res,next) => {
     .catch((err) => console.log(err))
     
 })
+router.put('/remove-item/:meal_id' , async (req,res,next) => {
+    try {
+        let meal = await Meals.findOne({_id:req.params.meal_id })
+        console.log(req.body.index)
+        meal.items.splice(req.body.index,1)
+        console.log(meal)
+        await meal.save()
+        req.flash('success' , 'Item Remove')
+        res.redirect('back')
+    }
+    catch(err){
+        console.log(err)
+    }
+   
+})
 
 
 

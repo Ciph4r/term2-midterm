@@ -52,12 +52,24 @@
             <div class="features">
                 <div class="row">
 
+       
+
             <% for( let i = 0; i < foundPlan.length; i++ ) { %>
                         <div class="col-md-4">
-                          <div class="info">
+                          <div class="info ">
                             <h4 class="info-title"><%= foundPlan[i].time %> </h4>
                             <% for( let l = 0; l < foundPlan[i].items.length; l++ ) { %>
-                                <p><%= foundPlan[i].items[l].name %> </p>
+                                
+                                <form role="form" method="POST" action="/api/v1/dietPlan/remove-item/<%= foundPlan[i]._id %>?_method=PUT">
+    
+                                    <div class="row ">
+                                        <p><%= foundPlan[i].items[l].name %> </p>
+                                        <input type="hidden" name="index" id="index" value="<%= l %> " />                  
+                                        <button type="submit" class=" btn  btn-sm btn-primary" style="height: 25px;">&times;</button>     
+                                    </div>
+                                    </form>
+
+
                             <% } %>
                            <h3>Total Calories: <%= foundPlan[i].items.reduce((a,b) => a+Number(b.calories) , 0) %> </h3>
                           </div>

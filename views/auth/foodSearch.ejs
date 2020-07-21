@@ -50,7 +50,14 @@
                 <h4 class="info-title">Meal for :<%= foundMeal.time%> </h4>
                 <% if (foundMeal.items.length) { %>
                  <% for( let i = 0; i < foundMeal.items.length; i++ ) { %>
-                    <p>  <%= foundMeal.items[i].name %> </p>
+                    <form role="form" method="POST" action="/api/v1/dietPlan/remove-item/<%= foundMeal._id %>?_method=PUT">
+    
+                    <div class="row">
+                        <p class="col-md-5">  <%= foundMeal.items[i].name %> </p>
+                        <input type="hidden" name="index" id="index" value="<%= i %> " />                  
+                        <button type="submit" class=" btn btn-sm btn-primary" style="height: 25px;">&times</button>     
+                    </div>
+                    </form>
                  <% } %>
                 <% } %>
                 <h4>Total Calories <%= foundMeal.items.reduce((a,b) => a+Number(b.calories) , 0) %> </h4>
