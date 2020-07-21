@@ -103,9 +103,26 @@
                         </div>
                       </div>
                     </div>
-                  
+                     <% } %>
 
-                    
+                     <% if (user.goal.complete) { %>
+
+                      <div class="col-md-4">
+                        <div class="card">
+                          <div class="card-header">
+                            <h4 class="card-title">Current Goal: <%= user.goal.targetWeight %> LB</h4>
+                          </div>
+                          <div class="card-body">
+                            <div>
+                              <h5>Your Current Weight: <%= user.goal.currentWeight %> </h5>
+                            </div>
+                            <div class=" col-md-6 offset-md-3">
+                              <button onclick="location.href='/api/v1/users/add-goal'" class="btn btn-block btn-sm btn-primary">Add New Goal!</button>
+                          </div>
+                          </div>
+                        </div>
+                      </div>
+
                      <% } %>
 
                   <div class="col-md-4">
@@ -144,9 +161,36 @@
                       </div>
                     </div>
                   </div>
-
                 </div>
 
+                
+                <div class="section text-center">
+                  <div class="row">
+                    <div class="col-md-8 ml-auto mr-auto">
+                      <h2 class="title">Recent Meals</h2>
+                      <h5 class="description"></h5>
+                    </div>
+                  </div>
+                  <div class="features">
+                    <div class="row">
+                      <% for( let i = 0; i < userRecentDiet.length; i++ ) { %>
+                        <%= console.log(userRecentDiet[i]) %> 
+
+                        <div class="col-md-4">
+                          <div class="card" >
+                            <div class="card-header">
+                              <h4 class="card-title"><%= userRecentDiet[i].date %> </h4>
+                            </div>
+                            <div class="card-body">
+                              The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona...
+                            </div>
+                          </div>
+                        </div>
+
+                      <% } %>
+                    </div>
+                  </div>
+                </div>
 
 
 
@@ -198,6 +242,7 @@
                             </div>
                           </div>
                         </div>
+
                         <div class="features">
                           <div class="row">
                             <div class="col-md-4">
@@ -228,7 +273,9 @@
                               </div>
                             </div>
                           </div>
+
                         </div>
+
                       </div>
                       <div class="section text-center">
                         <div class="row">
