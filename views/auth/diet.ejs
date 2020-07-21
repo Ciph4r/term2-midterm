@@ -57,14 +57,14 @@
           </div>
 
           <% if (diet.length) { %>
-           <% for( let i = 0; i < diet.length; i++ ) { %>
-            <%= console.log(diet[i].meals[0]._id) %> 
-            <div class="col-md-8 ml-auto mr-auto">
-              <h4 class="title"><a href="dietPlan/show-meals/<%= diet[i].meals[0]._id %>"><%= diet[i].date %></a> </h4>
-            </div>
+            <% for( let i = 0; i < diet.length; i++ ) { %>
+             <%= console.log(diet[i].meals[0]._id) %> 
+             <div class="col-md-8 ml-auto mr-auto">
+               <h4 class="title"><a href="dietPlan/show-meals/<%= diet[i]._id %>"><%= diet[i].date %></a> </h4>
+             </div>
+            <% } %>
            <% } %>
-          <% } %>
-          </div>
+           </div>
 
  
 
