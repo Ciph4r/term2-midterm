@@ -1,7 +1,4 @@
 
-
-<%= console.log(meals) %> 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -55,14 +52,13 @@
             <div class="features">
                 <div class="row">
 
-            <% for( let i = 0; i < meals.meal.length; i++ ) { %>
+            <% for( let i = 0; i < foundPlan.length; i++ ) { %>
                         <div class="col-md-4">
                           <div class="info">
-                            <h4 class="info-title"><%= meals.meal[i].time %> </h4>
+                            <h4 class="info-title"><%= foundPlan[i].time %> </h4>
                             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
                           </div>
-                          <form role="form" method="GET" action="/api/v1/dietPlan/food-search/<%= meals._id %>/<%= meals.meal[i].time%>">
-    
+                          <form role="form" method="GET" action="/api/v1/dietPlan/food-search/<%= foundPlan[i]._id %>">
                             <div class="">
                                 <button type="submit" class="btn btn-block btn-lg btn-primary">Add Food</button>
                             </div>

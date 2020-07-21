@@ -47,8 +47,13 @@
         <div class="row">
             <div class="info col-md-2">
                 
-                <h4 class="info-title"><%= target.time%> </h4>
-                <%= console.log(target.meals) %> 
+                <h4 class="info-title">Meal for :<%= foundMeal.time%> </h4>
+                <% if (foundMeal.items.length) { %>
+                 <% for( let i = 0; i < foundMeal.items.length; i++ ) { %>
+                    <p>  <%= foundMeal.items[i].name %> </p>
+                 <% } %>
+
+                <% } %>
                 <p></p>
               </div>
 
@@ -58,8 +63,7 @@
             <form role="form" method="GET" action="/api/v1/dietPlan/findfood">
               <div class="form-group bmd-form-group text-center ">
                   <label class="bmd-label-floating">Food Search</label>
-                  <input type="hidden" name="mealId" id="mealId" value="<%= target.id%>" />
-                  <input type="hidden" name="mealTime" id="mealTime" value="<%= target.time%>" />
+                  <input type="hidden" name="mealId" id="mealId" value="<%= foundMeal._id%>" />
                   <input type="search" name="search" id="search"class="form-control text-center" >
               </div>
 
@@ -85,8 +89,7 @@
                     <h5 class="description"> Protein : <%= data.parsed[0].food.nutrients.PROCNT %> </h5>
                   </div>
                   <form role="form" method="POST" action="/api/v1/dietPlan/add-food?_method=PUT">
-                    <input type="hidden" name="mealId" id="mealId" value="<%= target.id %>" />
-                    <input type="hidden" name="mealTime" id="mealTime" value="<%= target.time%>" />
+                    <input type="hidden" name="mealId" id="mealId" value="<%= foundMeal._id%>" />
                     <input type="hidden" name="name" id="name" value="<%= data.parsed[0].food.label %>" />
                     <input type="hidden" name="calories" id="calories" value="<%= data.parsed[0].food.nutrients.ENERC_KCAL%>" />
                     <input type="hidden" name="fat" id="fat" value="<%= data.parsed[0].food.nutrients.FAT %>" />

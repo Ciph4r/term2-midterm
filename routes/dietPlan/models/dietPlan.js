@@ -9,7 +9,7 @@ const DietPlanSchema = new mongoose.Schema({
             meals: { type: Schema.Types.ObjectId, ref: 'Meals' }
         }
     ],
-    
+    number: {type: Number},
     date: {type:String}
 })
 

@@ -8,6 +8,7 @@ const moment = require('moment')
 const app = require('../../app');
 const axios = require('axios');
 const { query } = require('express');
+const Meal = require('../meal/models/Meal');
 require('dotenv').config()
 
 
@@ -50,22 +51,17 @@ router.post('/add-diet' , async (req,res,next) => {
 
     try {
         let dietPlan = await new DietPlan()
-        let meals = await new Meals()
         dietPlan.owner = req.user._id
         dietPlan.date = req.body.mealDate
-        dietPlan.meals.push(meals)
-
         for (let i = 0 ; i < req.body.mealQuantity ; i++){
-            // console.log(req.body[`mealTime${i}`])
-            const meal = {
-             time: req.body[`mealTime${i}`] 
-            }
-            meals.meal.push(meal)
-        
+            let meals = await new Meals()
+            dietPlan.meals.push(meals._id)
+            meals.owner = dietPlan._id
+            meals.time= req.body[`mealTime${i}`] 
+            await meals.save()
         }       
-                await meals.save()
                 await dietPlan.save()
-                return res.redirect('/api/v1/dietPlan/show-meals/'+ meals._id)
+                return res.redirect('/api/v1/dietPlan/show-meals/'+ dietPlan._id)
     }
     catch (err){
         console.log(err)
@@ -77,33 +73,33 @@ router.get('/add-meal' , (req,res,next) => {
     return res.render('auth/addMeals')
 })
 
-router.get('/show-meals/:meals_id' , (req,res,next) => {
-        Meals.findOne({_id : req.params.meals_id}).then((foundMeals) => {
-         
-            return res.render('auth/meals' , {meals: foundMeals} )
-        })
-        .catch((err) => console.log(err))
-        
+router.get('/show-meals/:dietPlan_id' , (req,res,next) => {
+    Meal.find({owner: req.params.dietPlan_id})
+    .populate('meals.meals')
+    .exec((err , foundPlan) => {
+        if(err) return next(err)
+        return res.render('auth/meals' , {foundPlan})
+    })
 
+        // DietPlan.findOne({_id : req.params.dietPlan_id}).then((foundPlan) => {
+         
+        //     return res.render('auth/meals' , {plan: foundPlan} )
+        // })
+        // .catch((err) => console.log(err))
+   
 })
 
 
-router.get('/food-search/:meals_id/:time' ,(req,res,next) => {
+router.get('/food-search/:meals_id' ,(req,res,next) => {
     Meals.findOne({_id : req.params.meals_id}).then((foundMeal) => {
-       let meals = foundMeal.meal.filter((meal) => {
-          if (meal.time === req.params.time){
-              return meal
-          }
-        })
-
-        const target = {
-            id: req.params.meals_id,
-            time: req.params.time,
-            meals: meals
-        }
+        // const target = {
+        //     id: req.params.meals_id,
+        //     time: req.params.time,
+        //     meals: meals
+        // }
         let data = {}
-        // console.log(foundMeal)
-        return res.render('auth/foodSearch', {data , target } )    
+        // // console.log(foundMeal)
+        return res.render('auth/foodSearch', {data ,foundMeal} )    
     })
 })
 
@@ -112,53 +108,36 @@ router.get('/food-search/:meals_id/:time' ,(req,res,next) => {
 
 router.get('/findfood' ,async (req,res,next) => {
         try {
-        let meals = await Meals.findOne({_id: req.query.mealId}).then((foundMeal) => {
-            return foundMeal.meal.filter((meal) => {
-                if (meal.time === req.query.mealTime){
-                    return meal
-                }
-              })
-        })
-        .catch((err) => console.log(err))
-            const target = {
-                id: req.query.mealId,
-                time: req.query.mealTime,
-                meals
-            }
-    
+            let foundMeal = await Meals.findOne({_id: req.query.mealId})
+  
         const search = req.query.search.split(' ').join('%20')
         const response = await axios.get(`https://api.edamam.com/api/food-database/v2/parser?ingr=${search}&app_id=${process.env.FOOD_ID}&app_key=${process.env.FOOD_KEY}`)
         let data = await response.data
-        return res.render('auth/foodSearch' , {data: data , target})
+        return res.render('auth/foodSearch' , {data: data , foundMeal})
       
           
     }
     catch(err) {
     console.log(err)
     }
-    
 })
+
 
 router.put('/add-food' , (req,res,next) => {
     const {calories , fat , protein , name, serving} = req.body
-    const time = req.body.mealTime
     const mealId = req.body.mealId
     Meals.findOne({_id : mealId}).then((foundMeal) => {
-        foundMeal.meal.forEach((meal) => {
-            if (meal.time === time){
-                meal.items = []
-                meal.items.push({
-                    name,
-                    calories,
-                    fat,
-                    protein,
-                    serving
-                })
+    foundMeal.items.push({
+      name,
+      calories,
+      fat,
+      protein,
+      serving
+     })
+    foundMeal.save().then(()=> {
+        res.redirect('back')
+    })            
                
-                
-            } 
-        })
-        foundMeal.save()
     })
     .catch((err) => console.log(err))
     
