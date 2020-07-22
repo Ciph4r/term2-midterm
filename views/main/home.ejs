@@ -83,12 +83,12 @@
               <div class="section text-center">
                 <div class="row">
 
-                  <% if (weighIn.length) { %>
+                  <% if (time.show) { %>
                     
                     <div class="col-md-4">
                       <div class="card">
                         <div class="card-header">
-                          <h4 class="card-title"><%= weighIn %> </h4>
+                          <h4 class="card-title"><%= time.header %> </h4>
                         </div>
                         <div class="card-body">
                           
@@ -174,15 +174,15 @@
                   <div class="features">
                     <div class="row">
                       <% for( let i = 0; i < userRecentDiet.length; i++ ) { %>
-                        <%= console.log(userRecentDiet[i]) %> 
+                        
 
                         <div class="col-md-4">
                           <div class="card" >
                             <div class="card-header">
-                              <h4 class="card-title"><%= userRecentDiet[i].date %> </h4>
+                              <h4 class="card-title"><a href="api/v1/dietPlan/show-meals/<%= userRecentDiet[i]._id %> "><%= userRecentDiet[i].date %></a> </h4>
                             </div>
                             <div class="card-body">
-                              The place is close to Barceloneta Beach and bus stop just 2 min by walk and near to "Naviglio" where you can enjoy the main night life in Barcelona...
+                               
                             </div>
                           </div>
                         </div>

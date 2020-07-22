@@ -44,14 +44,22 @@ router.get('/', async function (req, res, next) {
       
         const lastWeight = user.userInfo.weight[user.userInfo.weight.length-1].date
         let date = lastWeight.split(',')
-        let hours = date[1].split(' ')[1]
-        let milliSec = new Date(`${date[0]} ${hours}`).getTime()
+        let hours = date[1].split(' ')
+        console.log(hours[2])
+        let milliSec = new Date(`${date[0]} ${hours[1]}`).getTime()
         let now = new Date(Date.now())
        //////////////////
-       
-        if((now.getTime() - milliSec) > 120000){
+       let time = {
+         show: false
+       }
+        if(hours[2] === 'pm'){
+          milliSec += 43200000
+        }
+        if((now.getTime() - milliSec ) > 120000){
           let timePassed = convertMS((now.getTime() - milliSec))
-          req.flash('weighIn' , ` ${timePassed.day}Days, ${timePassed.hour}Hours, ${timePassed.minute}Minutes have passed since last weight In`)
+          time.header = ` ${timePassed.day}Days, ${timePassed.hour}Hours, ${timePassed.minute}Minutes have passed since last weight In`
+          time.show = true
+          // req.flash('weighIn' , ` ${timePassed.day}Days, ${timePassed.hour}Hours, ${timePassed.minute}Minutes have passed since last weight In`)
         }
 //////////////////////////////////////////
           let userDiet = await DietPlan.find({owner: req.user._id})
@@ -59,16 +67,12 @@ router.get('/', async function (req, res, next) {
           let userRecentDiet = []
           let num = 0
           for (let i = userDiet.length -1 ; i >= 0 ; i--){
-            
             if(num  < 3)
               userRecentDiet.push(userDiet[i])
              num ++
-        
           }
-          console.log(userRecentDiet)
-           
-
-           return res.render('main/home' ,{recentDiet , userRecentDiet})
+    
+           return res.render('main/home' ,{recentDiet , userRecentDiet , time})
            
              }
              return res.render('main/home' ,{recentDiet});
