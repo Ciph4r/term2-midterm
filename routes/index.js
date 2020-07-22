@@ -45,7 +45,6 @@ router.get('/', async function (req, res, next) {
         const lastWeight = user.userInfo.weight[user.userInfo.weight.length-1].date
         let date = lastWeight.split(',')
         let hours = date[1].split(' ')
-        console.log(hours[2])
         let milliSec = new Date(`${date[0]} ${hours[1]}`).getTime()
         let now = new Date(Date.now())
        //////////////////

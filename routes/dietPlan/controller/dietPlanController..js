@@ -1,7 +1,8 @@
-const DietPlan = require('./models/dietPlan')
-const Meals = require('../meals/models/Meals')
+const DietPlan = require('../../dietPlan/models/dietPlan')
+const Meals = require('../../meals/models/Meals')
 const axios = require('axios')
-const Meal = require('../meal/models/Meal');
+require('dotenv').config()
+
 const { check , validationResult } = require('express-validator');
 
 
@@ -85,8 +86,9 @@ module.exports = {
         })
         .catch((err) => console.log(err))
         
-    })
-    router.put('/remove-item/:meal_id' , async (req,res,next) => {
+    },
+
+    removeItem : async (req,res,next) => {
         try {
             let meal = await Meals.findOne({_id:req.params.meal_id })
             meal.items.splice(req.body.index,1)
@@ -100,5 +102,6 @@ module.exports = {
         }
        
     }
+
 
 }
