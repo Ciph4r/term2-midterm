@@ -70,12 +70,22 @@
                           <input type="date" name="completeDate" id="completeDate" class="form-control text-center">
                        </div> 
                        <div>
-                        <input type="hidden" name="user" id="user" class="form-control text-center" value=" <%= user.userInfo.bmr %> ">
-                        <%= console.log(user.userInfo.bmr) %> 
+                        <input type="hidden" name="userbmr" id="userbmr" class="form-control text-center" value="<%= user.userInfo.bmr %>">
+                        <input type="hidden" name="useract" id="useract" class="form-control text-center" value="<%= user.userInfo.activityLV %>">
+                        <input type="hidden" name="birthday" id="birthday" class="form-control text-center" value="<%= user.userInfo.birthday %>">
+                        <input type="hidden" name="gender" id="gender" class="form-control text-center" value="<%= user.userInfo.gender %>">
+                        <input type="hidden" name="height" id="height" class="form-control text-center" value="<%= user.userInfo.height %>">
                        </div>
-                       <div id="targetArea">
-                        
+                       <div>
+                        <div id="targetArea" class="">
+                        </div>
+                        <div id="targetArea2" class="">
+                        </div>
+                        <div id="targetArea3" class="">
+                        </div>
+
                        </div>
+
 
                 <div class="col-md-4 offset-md-4">
                     <button type="submit" class="btn btn-block btn-lg btn-primary">ADD!</button>
