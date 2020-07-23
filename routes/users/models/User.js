@@ -19,6 +19,7 @@ const UserSchema = new mongoose.Schema({
     goal:{
         currentWeight: {type:Number, default: ""},
         targetWeight: {type: Number, default: ""},
+        completeDate: {type: String},
         complete:{type:Boolean, default: false},
         pastGoal: {type: Array}
     },

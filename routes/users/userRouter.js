@@ -1,23 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const User = require('./models/User');
 const passport = require('passport');
 const { check , validationResult } = require('express-validator');
 const { register , registerUpdate , registerComplete , account , profile , profileEdit , addGoal , weighIn} = require('./controller/userController');
 const auth = require('../middleware/auth')
+const {userRegistrationValidation , loginValidation , goalValidation} = require('./middleWare/validation')
 
-
-
-const userRegistrationValidation = [
-    check('fName' ,'First Name is required').not().isEmpty(),
-    check('lName' ,'Last Name is required').not().isEmpty(),
-    check('password' ,'Password must be 6 character long').isLength({min:6}),
-  ]
-
-  const loginValidation = [
-    check('email' ,'Email is required').not().isEmpty(),
-    check('password' ,'Password is required').not().isEmpty(),
-  ]
 
 
   const checkLoginField = (req,res,next)=>{
@@ -38,7 +26,6 @@ router.get('/', function(req, res, next) {
 
 
 router.post('/register' , register);
-
 router.get('/register-update/:name/:password' , registerUpdate)
 router.put('/register-Complete', userRegistrationValidation, registerComplete)
 
@@ -90,29 +77,10 @@ router.get('/add-goal', auth,(req,res,next) => {
   res.render('auth/addGoal')
 })
 
-router.put('/add-goal',auth , addGoal)
+router.put('/add-goal', goalValidation ,auth , addGoal)
 
 router.put('/weigh-in' , weighIn)
 
-
-// async (req,res,next) => {
-//   try {
-//     let user = await User.findOne({email: req.user.email})
-//     user.userInfo.weight.push({
-//       date: moment().format("YYYY-MM-DD , h:mm:ss a"),
-//       weight:user.goal.currentWeight
-//     })
-//     user.goal.currentWeight = req.body.weight
-//     await user.save()
-//     req.flash('success' , 'Weight Updated')
-//     return res.redirect('back')
-//   }
-//   catch(err){
-//     console.log(err)
-//   }
-
-
-// })
 
 
   module.exports = router;

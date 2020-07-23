@@ -220,9 +220,13 @@ module.exports = {
    },
 
    addGoal: async (req,res,next) => { 
-     
+    const errors = validationResult(req)
+    if(!errors.isEmpty()){
+      req.flash('errors' , errors.array()[0].msg)
+      return res.redirect('back')
+  }
+
      try{
-      console.log('jj')
       let user = await User.findOne({email: req.user.email})
       if(user.goal.complete){
         user.goal.pastGoal.push(
@@ -239,9 +243,10 @@ module.exports = {
           })
         }
       }
-      
-      user.goal.targetWeight = req.body.targetWeight
-      user.goal.currentWeight = req.body.weight
+      let {weight , targetWeight ,completeDate} = req.body
+      user.goal.targetWeight = targetWeight
+      user.goal.currentWeight = weight
+      user.goal.completeDate = completeDate
       user.goal.complete = true
       await user.save()
       req.flash('success' , 'Goal Updated')
@@ -251,6 +256,8 @@ module.exports = {
         console.log(err)
      }
    },
+
+
    weighIn: async (req,res,next) => {
     try {
       let user = await User.findOne({email: req.user.email})

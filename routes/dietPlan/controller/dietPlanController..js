@@ -10,6 +10,19 @@ const { check , validationResult } = require('express-validator');
 
 
 module.exports = {
+    home : (req,res,next) => {
+        DietPlan.find({owner: req.user._id}).then((foundDiet) => {
+            if (foundDiet){
+                return res.render('auth/diet' , {diet: foundDiet})
+            }else {
+                return res.render('auth/diet')
+            }    
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    },
+    
     addDiet : async (req,res,next) => {
         const errors = validationResult(req)
         if(!errors.isEmpty()){

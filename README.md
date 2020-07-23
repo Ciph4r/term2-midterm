@@ -9,14 +9,14 @@
 
 # routes base: api/v1
 ## user routes /user
-### post register
+### post /register
 ### /register-update/:name/:password
 ### get /login
 ### post /login
-### get /logout'
+### get /logout
 ### get /account
 ### put /account
-### get /profile'
+### get /profile
 ### put /profile
 ### get /profileEdit
 ### get /add-goal
