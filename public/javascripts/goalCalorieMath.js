@@ -128,10 +128,6 @@ targetWeight.addEventListener('input' , (event) => {
 
 
 
-    // if (targetWeight.value === 0){
-    //     clearArea2()
-    // }
-
 })
 
 date.addEventListener('input' , (event) => {
@@ -142,12 +138,12 @@ date.addEventListener('input' , (event) => {
     let now = Date.now()
     let milliSec = new Date(date.value).getTime()
     const days = milliSec - now
- let x = convertMS(days)
+    let x = convertMS(days)
     let result = ((weight.value - targetWeight.value) * 3500) / x.day
 
-    console.log(x)
+    
 
-    if (((weight.value - targetWeight.value) * 3500) / x.day > 2000){
+    if (((weight.value - targetWeight.value) * 3500) / x.day > 1500){
         result = 'Not a Possible Goal'
     }
 
@@ -165,36 +161,6 @@ date.addEventListener('input' , (event) => {
 })
 
 
-
-
-// date.addEventListener('input' , (event) => {
-//     event.preventDefault()
-//     let area = document.getElementById('targetArea3')
-//     clearArea3()
-
-//     let now = Date.now()
-//     let milliSec = new Date(date.value).getTime()
-//     const days = milliSec - now
-//     let resault =((weight.value - targetWeight.value) * 3500) / x.day
-//     let x = convertMS(days)
-  
-
-//     if (((weight.value - targetWeight.value) * 3500) / x.day > 2000){
-//         resault = 'you are dead'
-//     }
-
-
-
-//     const createDiv = document.createElement('div')
-//     createDiv.setAttribute('class' , "col-md-3")
-//     area.appendChild(createDiv)
-//     const createPara = document.createElement('p')
-
-
-//     createPara.innerText =  'kk'
-//     createDiv.appendChild(createPara)
-
-// })
 
 
 
