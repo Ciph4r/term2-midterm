@@ -153,11 +153,13 @@ date.addEventListener('input' , (event) => {
     createDiv.setAttribute('class' , "col-md-3")
     area.appendChild(createDiv)
     const createPara = document.createElement('p')
+    const createPara2 = document.createElement('p')
 
     
-    createPara.innerText =  result
+    createPara.innerText =  `Calorie Deficit Per day: ${result}`
     createDiv.appendChild(createPara)
-
+    createPara2.innerText =  `Avalible Calorie Per Day: ${tdeeCalc( bmr, useract.value)  - result}`
+    createDiv.appendChild(createPara2)
 })
 
 
