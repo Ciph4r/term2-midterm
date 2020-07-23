@@ -91,40 +91,83 @@ const clearArea = () => {
     return Math.abs(agedt.getUTCFullYear() - 1970);
 }
 
+const goal = () => {
+  let area = document.getElementById('targetArea2')
+  clearArea2()
+  const createDiv = document.createElement('div')
+  createDiv.setAttribute('class' , "col-md-3")
+  area.appendChild(createDiv)
+  const createPara = document.createElement('p')
+  createPara.innerText = (weight.value - targetWeight.value) * 3500
+  createDiv.appendChild(createPara)
+}
+
+
+
+const fillDate = () => {
+  let area = document.getElementById('targetArea3')
+  clearArea3()
+  let now = Date.now()
+  let milliSec = new Date(date.value).getTime()
+  const days = milliSec - now
+  let x = convertMS(days)
+  let result = (((weight.value - targetWeight.value) * 3500) / x.day).toFixed(0)
+  if (((weight.value - targetWeight.value) * 3500) / x.day > 1500){
+      result = 'Not a Realistic Goal'
+  }
+  const createDiv = document.createElement('div')
+  createDiv.setAttribute('class' , "col-md-3")
+  area.appendChild(createDiv)
+  const createPara = document.createElement('p')
+  const createPara2 = document.createElement('p')
+
+  createPara.innerText =  `Calorie Deficit Per day: ${result}`
+  createDiv.appendChild(createPara)
+  createPara2.innerText =  `Avalible Calorie Per Day: ${(tdeeCalc( bmr, useract.value)  - result).toFixed(0)}`
+  createDiv.appendChild(createPara2)
+}
+
+const fillWeight = () => {
+  let area = document.getElementById('targetArea')
+  clearArea()
+  const createDiv = document.createElement('div')
+  createDiv.setAttribute('class' , "col-md-3")
+  area.appendChild(createDiv)
+  const createPara = document.createElement('p')
+  createPara.setAttribute('name' , "tdee")
+  createPara.setAttribute('id' , "tdee")
+  const date = birthday.value.split('-')
+  const age = calculateAge(new Date(Number(date[0]), Number(date[1]), Number(date[2])))
+  const bmr =  bmrCalc(gender.value , age , (weight.value*1) / 2.205, height.value *2.54)
+  createPara.innerText = `Your TDEE IS : ${tdeeCalc( bmr, useract.value)}`
+  createDiv.appendChild(createPara)
+
+
+}
+
 
 
 weight.addEventListener('input' , (event) => {
     event.preventDefault()
-    let area = document.getElementById('targetArea')
-    clearArea()
-    clearArea2()
-    clearArea3()
-    const createDiv = document.createElement('div')
-    createDiv.setAttribute('class' , "col-md-3")
-    area.appendChild(createDiv)
-    const createPara = document.createElement('p')
-
-    const date = birthday.value.split('-')
-    const age = calculateAge(new Date(Number(date[0]), Number(date[1]), Number(date[2])))
-    const bmr =  bmrCalc(gender.value , age , (weight.value*1) / 2.205, height.value *2.54)
-
-    createPara.innerText = `Your TDEE IS : ${tdeeCalc( bmr, useract.value)}`
-    createDiv.appendChild(createPara)
+    fillWeight()
+    if(targetWeight.value){
+      goal()
+    }
+    if(date){
+      fillDate()
+    }
 
 })
 
 targetWeight.addEventListener('input' , (event) => {
     event.preventDefault()
-
-    let area = document.getElementById('targetArea2')
-    clearArea2()
-    clearArea3()
-    const createDiv = document.createElement('div')
-    createDiv.setAttribute('class' , "col-md-3")
-    area.appendChild(createDiv)
-    const createPara = document.createElement('p')
-    createPara.innerText = (weight.value - targetWeight.value) * 3500
-    createDiv.appendChild(createPara)
+    goal()
+    if(weight){
+      fillWeight()
+    }
+    if(date){
+      fillDate()
+    }
 
 
 
@@ -132,34 +175,7 @@ targetWeight.addEventListener('input' , (event) => {
 
 date.addEventListener('input' , (event) => {
     event.preventDefault()
-    let area = document.getElementById('targetArea3')
-    clearArea3()
-
-    let now = Date.now()
-    let milliSec = new Date(date.value).getTime()
-    const days = milliSec - now
-    let x = convertMS(days)
-    let result = ((weight.value - targetWeight.value) * 3500) / x.day
-
-    
-
-    if (((weight.value - targetWeight.value) * 3500) / x.day > 1500){
-        result = 'Not a Possible Goal'
-    }
-
-
-
-    const createDiv = document.createElement('div')
-    createDiv.setAttribute('class' , "col-md-3")
-    area.appendChild(createDiv)
-    const createPara = document.createElement('p')
-    const createPara2 = document.createElement('p')
-
-    
-    createPara.innerText =  `Calorie Deficit Per day: ${result}`
-    createDiv.appendChild(createPara)
-    createPara2.innerText =  `Avalible Calorie Per Day: ${tdeeCalc( bmr, useract.value)  - result}`
-    createDiv.appendChild(createPara2)
+  fillDate()
 })
 
 

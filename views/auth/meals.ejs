@@ -48,21 +48,21 @@
       <div class="section">                      
         <div class="row">
           <div class="col-md-8 ml-auto mr-auto">
-            <h2 class="title text-center"></h2>
+            <h2 class="title text-center">  </h2>
+            <h3 class="text-center">Total Calories for the day : <%= foundPlan.reduce((a,b) => a + b.totalCalories , 0) %> </h3>
             <div class="features">
                 <div class="row">
-
-       
-
+              
+    
             <% for( let i = 0; i < foundPlan.length; i++ ) { %>
                         <div class="col-md-4">
                           <div class="info ">
-                            <h4 class="info-title"><%= foundPlan[i].time %> </h4>
+                            <h4 class="info-title text-center"><%= foundPlan[i].time %> </h4>
                             <% for( let l = 0; l < foundPlan[i].items.length; l++ ) { %>
                                 
                                 <form role="form" method="POST" action="/api/v1/dietPlan/remove-item/<%= foundPlan[i]._id %>?_method=PUT">
     
-                                    <div class="row ">
+                                    <div class="row offset-3">
                                         <p><%= foundPlan[i].items[l].name %> </p>
                                         <input type="hidden" name="index" id="index" value="<%= l %> " />                  
                                         <button type="submit" class=" btn  btn-sm btn-primary" style="height: 25px;">&times;</button>     
@@ -71,11 +71,11 @@
 
 
                             <% } %>
-                           <h3>Total Calories: <%= foundPlan[i].items.reduce((a,b) => a+Number(b.calories) , 0) %> </h3>
+                           <h4 class="text-center">Total Calories: <%= foundPlan[i].items.reduce((a,b) => a+Number(b.calories) , 0) %> </h4>
                           </div>
                           <form role="form" method="GET" action="/api/v1/dietPlan/food-search/<%= foundPlan[i]._id %>">
                             <div class="">
-                                <button type="submit" class="btn btn-block btn-lg btn-primary">Add Food</button>
+                                <button type="submit" class="btn btn-block btn-md btn-primary">Add Food</button>
                             </div>
                           </form>
                         </div>

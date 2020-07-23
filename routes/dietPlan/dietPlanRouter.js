@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const Meals = require('../meals/models/Meals')
 const auth = require('../middleware/auth');
-const Meal = require('../meal/models/Meal');
 const { check , validationResult } = require('express-validator');
 const {home , addDiet, findFood , addFood , removeItem} = require('./controller/dietPlanController.')
 
@@ -24,10 +23,11 @@ router.get('/add-meal' ,auth , (req,res,next) => {
 })
 
 router.get('/show-meals/:dietPlan_id' , auth, (req,res,next) => {
-    Meal.find({owner: req.params.dietPlan_id})
+    Meals.find({owner: req.params.dietPlan_id})
     .populate('meals.meals')
     .exec((err , foundPlan) => {
         if(err) return next(err)
+        console.log(foundPlan)
         return res.render('auth/meals' , {foundPlan})
     })
 })

@@ -239,13 +239,23 @@ module.exports = {
         if(user.goal.pastGoal.length > 0){
           user.userInfo.weight.push({
             date: moment().format("YYYY-MM-DD , h:mm:ss a"),
-            weight: user.userInfo.currentWeight
+            weight: user.goal.currentWeight
           })
         }
       }
+      const {gender , birthday, height,  activityLV } = user.userInfo
       let {weight , targetWeight ,completeDate} = req.body
+      const date = birthday.split('-')
+      const age = birthdayCalc(new Date(Number(date[0]), Number(date[1]), Number(date[2])))
+      let bmr = bmrCalc(gender , age , (weight*1) / 2.205, height *2.54)
+      ////////////////////////////////////////
+
+
+      user.calPerDay = 
+      ////////////////////////////////////
       user.goal.targetWeight = targetWeight
       user.goal.currentWeight = weight
+      user.userInfo.tdee = tdeeCalc(bmr , activityLV)
       user.goal.completeDate = completeDate
       user.goal.complete = true
       await user.save()

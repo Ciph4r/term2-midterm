@@ -5,6 +5,7 @@
 
 ## edge case to be fix at a later date
 ### user can log in with temp password/username
+### need to add check for complete date to be greater than date now
 ////////////////////////////////////////
 
 # routes base: api/v1
