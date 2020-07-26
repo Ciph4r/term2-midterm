@@ -1,4 +1,42 @@
-# term2-midterm
+# Lose it 
+
+## Table Of content
+1. User Routes
+2. Diet Plan Routes
+3. How to Use
+
+
+
+## Routes Base Path: /api/v1
+
+### user routes /user
+1. post `/register`
+2. get `/register-update/:name/:password`
+3. get `/login`
+4. post `/login`
+5. get `/logout`
+6. get `/account`
+7. put `/account`
+8. get `/profile`
+9. put `/profile`
+10. get `/profileEdit`
+11. get `/add-goal`
+12. put `/add-goal`
+13. put `/weigh-in`
+
+### dietplan routes / dietplan
+
+1. get `/`
+2. post `/add-diet`
+3. get `/add-meal`
+4. get `/show-meals/:dietPlan_id`
+5. get `/food-search/:meals_id`
+6. get `/findfood`
+7. put `/add-food`
+8. put `/remove-item/:meal_id`
+
+
+
 
 ## things to add at the end
 ### send a comfirmation email when user change account settings
@@ -7,19 +45,3 @@
 ### user can log in with temp password/username
 ### need to add check for complete date to be greater than date now
 ////////////////////////////////////////
-
-# routes base: api/v1
-## user routes /user
-### post /register
-### /register-update/:name/:password
-### get /login
-### post /login
-### get /logout
-### get /account
-### put /account
-### get /profile
-### put /profile
-### get /profileEdit
-### get /add-goal
-### put /add-goal
-### put /weigh-in
