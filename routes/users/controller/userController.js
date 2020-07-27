@@ -8,6 +8,7 @@ const { check , validationResult } = require('express-validator');
 const moment = require('moment')
 const {bmrCalc , tdeeCalc} = require('../helper/bmrTddeCalc')
 const birthdayCalc = require('../helper/birhdayCalc')
+const calPerDay = require('../helper/calPerDay')
 
 
 
@@ -251,13 +252,22 @@ module.exports = {
       ////////////////////////////////////////
 
 
-      user.calPerDay = 
+     
+  
       ////////////////////////////////////
       user.goal.targetWeight = targetWeight
       user.goal.currentWeight = weight
       user.userInfo.tdee = tdeeCalc(bmr , activityLV)
       user.goal.completeDate = completeDate
       user.goal.complete = true
+     
+    
+      const perDay = calPerDay(completeDate , weight,targetWeight,user.userInfo.tdee)
+      if(!perDay){
+        req.flash('errors' , 'Unrealistic Goal')
+        return res.redirect('back')
+      }
+       user.goal.calPerDay = perDay
       await user.save()
       req.flash('success' , 'Goal Updated')
       return res.redirect('/api/v1/users/profile')

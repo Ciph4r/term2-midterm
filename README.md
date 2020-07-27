@@ -4,6 +4,7 @@
 1. User Routes
 2. Diet Plan Routes
 3. How to Use
+4. Technoligy Used
 
 
 
@@ -24,7 +25,7 @@
 12. put `/add-goal`
 13. put `/weigh-in`
 
-### dietplan routes / dietplan
+### dietplan routes /dietplan
 
 1. get `/`
 2. post `/add-diet`
@@ -35,6 +36,13 @@
 7. put `/add-food`
 8. put `/remove-item/:meal_id`
 
+
+## Technology Stack
+1. JavaScript
+2. Mongoose
+3. MongoDB
+4. Passport
+5. Express
 
 
 

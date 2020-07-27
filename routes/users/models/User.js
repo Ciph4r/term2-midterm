@@ -21,6 +21,7 @@ const UserSchema = new mongoose.Schema({
         targetWeight: {type: Number, default: ""},
         completeDate: {type: String},
         complete:{type:Boolean, default: false},
+        calPerDay: {type:Number , default:0},
         pastGoal: {type: Array}
     },
     auth: {type:Boolean , default: false},
