@@ -42,7 +42,8 @@ router.get('/', async function (req, res, next) {
     }
     
     if(req.user){
-      let user =  await User.findOne({email: req.user.email})
+      if(req.user.userInfo.userInfo){
+        let user =  await User.findOne({email: req.user.email})
       
         const lastWeight = user.userInfo.weight[user.userInfo.weight.length-1].date
         let date = lastWeight.split(',')
@@ -75,6 +76,10 @@ router.get('/', async function (req, res, next) {
           }
     
            return res.render('main/home' ,{recentDiet , userRecentDiet , time})
+
+
+      }
+
            
              }
              return res.render('main/home' ,{recentDiet});
