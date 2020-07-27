@@ -27,7 +27,6 @@ router.get('/show-meals/:dietPlan_id' , auth, (req,res,next) => {
     .populate('meals.meals')
     .exec((err , foundPlan) => {
         if(err) return next(err)
-        console.log(foundPlan)
         return res.render('auth/meals' , {foundPlan})
     })
 })
