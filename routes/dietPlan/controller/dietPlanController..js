@@ -22,6 +22,31 @@ module.exports = {
             console.log(err)
         })
     },
+    // home : (req,res,next) => {
+
+    //     DietPlan.find({owner: req.user._id}).then((foundDiet) => {
+            
+    //      for (let i = 0 ; i > foundDiet.length; i++){
+            
+    //         Meals.findOne({owner: foundDiet._id})
+    //         .populate('meals')
+
+    //      }
+    
+
+
+
+    //         if (foundDiet){
+               
+    //             return res.render('auth/diet' , {diet: foundDiet})
+    //         }else {
+    //             return res.render('auth/diet')
+    //         }    
+    //     })
+    //     .catch((err) => {
+    //         console.log(err)
+    //     })
+    // },
     
     addDiet : async (req,res,next) => {
         const errors = validationResult(req)
