@@ -57,17 +57,17 @@ module.exports = {
                  request
                 .then((result) => {
                   req.flash('success', 'THANK YOU FOR REGISTERING , CHECK YOUR EMAIL');
-                  return res.redirect(301, '/api/v1/users/')
+                  return res.redirect(301, 'back')
                 })
                 .catch((err) => {
                     console.log(err)
                   req.flash('errors', 'register sucessful, email server down');
-                  return res.redirect('/api/v1/users/')
+                  return res.redirect('back')
                 })
             })
             .catch((err)=> {
                 req.flash('errors', 'Register Failed')
-                return res.redirect('/api/v1/users/')
+                return res.redirect('back')
             })
 
         }
