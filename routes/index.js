@@ -4,6 +4,8 @@ const Meals = require('./meals/models/Meals')
 const User = require('./users/models/User')
 const DietPlan = require('./dietPlan/models/dietPlan')
 const moment = require('moment')
+const mailjet = require('node-mailjet')
+  .connect(process.env.MAILKEY, process.env.MAILSECRET)
 /* GET home page. */
 
 const convertMS = ( milliseconds ) => {
@@ -90,5 +92,58 @@ router.get('/', async function (req, res, next) {
   }
   
 });
+
+
+router.get('/contact',(req,res,next)=> {
+  res.render('main/contact')
+})
+router.post('/contact',async (req,res,next)=> {
+
+  const {name,email,message} = req.body
+
+  try{
+
+    const request = mailjet
+    .post("send", {
+      'version': 'v3.1'
+    })
+    .request({
+      "Messages": [{
+        "From": {
+          "Email": "david.lau@codeimmersives.com",
+          "Name": "Dave"
+        },
+        "To": [{
+          "Email": 'david.lau@codeimmersives.com',
+          "Name": ''
+        }],
+        "Subject": "Lost It Suggestion.",
+        "TextPart": "",
+        "HTMLPart": `From :${name} contact: ${email} message: ${message}`,
+        "CustomID": ""
+      }]
+    })
+     request
+    .then((result) => {
+      req.flash('success', 'Message sent');
+      return res.redirect(301, 'back')
+    })
+    .catch((err) => {
+        console.log(err)
+      req.flash('errors', 'register sucessful, email server down');
+      return res.redirect('back')
+    })
+
+  }
+
+
+
+  catch(err){
+    throw next(err)
+  }
+
+
+})
+
 
 module.exports = router;

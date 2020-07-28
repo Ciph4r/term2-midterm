@@ -10,45 +10,45 @@ const { check , validationResult } = require('express-validator');
 
 
 module.exports = {
-    // home : (req,res,next) => {
-    //     DietPlan.find({owner: req.user._id}).then((foundDiet) => {
-    //         if (foundDiet){
-    //             return res.render('auth/diet' , {diet: foundDiet})
-    //         }else {
-    //             return res.render('auth/diet')
-    //         }    
-    //     })
-    //     .catch((err) => {
-    //         console.log(err)
-    //     })
-    // },
-    home : async (req,res,next) => {
-       let foundDiet = await DietPlan.find({owner: req.user._id})
-            // console.log(foundDiet[0])
-          let x = await foundDiet.map((x) => {
-            Meals.findOne({owner: x._id})
-            .populate('meals')
-         })
-         console.log(x)
-         
-            
-            // Meals.find({owner: JSON.stringify(foundDiet[i]._id)})
-            // .then((x)=> console.log(x))
-            // .populate('meals')
-            // .exec((err,foundPlan)=> {
-            //     if(err) return next(err)
-            //     console.log(foundPlan)
-                
-            // })
-
+    home : (req,res,next) => {
+        DietPlan.find({owner: req.user._id}).then((foundDiet) => {
             if (foundDiet){
-               
                 return res.render('auth/diet' , {diet: foundDiet})
             }else {
                 return res.render('auth/diet')
             }    
-       
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     },
+    // home : async (req,res,next) => {
+    //    let foundDiet = await DietPlan.find({owner: req.user._id})
+    //         // console.log(foundDiet[0])
+    //       let x = await foundDiet.map((x) => {
+    //         Meals.findOne({owner: x._id})
+    //         .populate('meals')
+    //      })
+    //      console.log(x)
+         
+            
+    //         // Meals.find({owner: JSON.stringify(foundDiet[i]._id)})
+    //         // .then((x)=> console.log(x))
+    //         // .populate('meals')
+    //         // .exec((err,foundPlan)=> {
+    //         //     if(err) return next(err)
+    //         //     console.log(foundPlan)
+                
+    //         // })
+
+    //         if (foundDiet){
+               
+    //             return res.render('auth/diet' , {diet: foundDiet})
+    //         }else {
+    //             return res.render('auth/diet')
+    //         }    
+       
+    // },
     
     addDiet : async (req,res,next) => {
         const errors = validationResult(req)

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <% include ../partials/head %> 
+  <title>
+    Contact Me - Lose It
+  </title>
+</head>
+
+<body class="landing-page sidebar-collapse">
+    <% include ../partials/navbar %> 
+  <div class="page-header header-filter" data-parallax="true" style="background-color: lightskyblue; height: 400px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-9 mx-auto">
+              <h1 class="mb-5 text-center">Contact Me</h1>
+            </div>
+            <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+
+                <% if (errors.length) { %>
+         
+                    <div class = 'alert alert-danger alert-dismissable'>
+                    <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <%= errors %>
+                    </div>
+                     <% } %>
+
+                     <% if (success.length) { %>
+         
+                        <div class = 'alert alert-success alert-dismissable'>
+                        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                        <%= success %>
+                        </div>
+                         <% } %>
+                   
+            </div>
+          </div>
+        </div>
+      </div>
+ 
+  
+  <div class="main main-raised">
+    <div class="container">
+      <div class="section ">
+        <div class="row">
+          <div class="col-md-8 ml-auto mr-auto">
+            <h2 class="title text-center">Fill Out Below</h2>
+
+
+            <form role="form" method="POST" action="/contact">
+                <div class="form-group bmd-form-group">
+                    <label class="bmd-label-floating">Name</label>
+                    <input type="text" name="Name" id="Name"class="form-control" >
+                </div>
+                <div class="form-group bmd-form-group">
+                    <label class="bmd-label-floating">email</label>
+                    <input type="email" name="email" id="email"class="form-control" >
+                </div>
+                <div class="form-group bmd-form-group">
+                    <h3 class="text-center">Message</h3>
+                    <textarea class="offset-2" id="message" name="message" rows="5" cols="60" >
+                        
+                        </textarea>
+                </div>
+                <div class="col-md-6 offset-md-3">
+                    <button type="submit" class="btn btn-block btn-lg btn-primary ">Send</button>
+                </div>
+  
+              </form>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <% include ../partials/footer %> 
+  <% include ../partials/script %> 
+  
+</body>
+
+</html>

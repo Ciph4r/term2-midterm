@@ -4,7 +4,7 @@
 1. User Routes
 2. Diet Plan Routes
 3. How to Use
-4. Technoligy Used
+4. Technology
 
 
 
@@ -37,19 +37,14 @@
 8. put `/remove-item/:meal_id`
 
 
-## Technology Stack
+## Technology
 1. JavaScript
 2. Mongoose
 3. MongoDB
 4. Passport
 5. Express
+6. EJS
+7. Heroku
 
 
 
-## things to add at the end
-### send a comfirmation email when user change account settings
-
-## edge case to be fix at a later date
-### user can log in with temp password/username
-### need to add check for complete date to be greater than date now
-////////////////////////////////////////
