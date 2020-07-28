@@ -37,7 +37,7 @@
 8. put `/remove-item/:meal_id`
 
 
-## Technology
+## Technology & Packages
 1. JavaScript
 2. Mongoose
 3. MongoDB
@@ -45,6 +45,17 @@
 5. Express
 6. EJS
 7. Heroku
+8. Moment
+9. Axios
+10. Bcryptjs
+11. Cookie-parser
+12. Nanoid
+13. Method-Override
+
+### API
+1. MailJet - Sending email "https://www.mailjet.com/"
+2. EDAMAN - Search Food database "https://developer.edamam.com/"
+
 
 
 
