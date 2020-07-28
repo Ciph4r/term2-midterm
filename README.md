@@ -10,7 +10,7 @@
 
 ## Routes Base Path: /api/v1
 
-### user routes /user
+### User routes /user
 1. post `/register`
 2. get `/register-update/:name/:password`
 3. get `/login`
@@ -25,7 +25,7 @@
 12. put `/add-goal`
 13. put `/weigh-in`
 
-### dietplan routes /dietplan
+### Diet Plan routes /dietplan
 
 1. get `/`
 2. post `/add-diet`
@@ -45,6 +45,11 @@
 5. Express
 6. EJS
 7. Heroku
+
+
+
+
+### Contact me @ david.lau@codeimmersives.com
 
 
 
