@@ -7,7 +7,10 @@
 4. Technology
 
 
-
+## Home Route
+1. get `/`
+2. get `/contact`
+2. post `/contact`
 ## Routes Base Path: /api/v1
 
 ### User routes /user
@@ -35,6 +38,7 @@
 6. get `/findfood`
 7. put `/add-food`
 8. put `/remove-item/:meal_id`
+9. delete `/delete-meal/:dietPlan_id`
 
 
 ## Technology & Packages

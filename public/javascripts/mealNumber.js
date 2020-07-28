@@ -18,7 +18,7 @@ const clearMealArea = () => {
         let num = 0
         for (let i = 0 ; i < mealNum.value ; i++){
             const createDiv = document.createElement('div')
-            createDiv.setAttribute('class' , "col-md-3")
+            createDiv.setAttribute('class' , "col-md-4")
             const createInput = document.createElement('input')
             createInput.setAttribute('type' , 'time')
             createInput.setAttribute('class' , 'form-control')
