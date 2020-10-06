@@ -39,7 +39,7 @@ router.put('/register-Complete', userRegistrationValidation, registerComplete)
 
   router.post('/login' ,loginValidation, checkLoginField, passport.authenticate('local-login', {
     successRedirect: '/',
-    failureRedirect: '/api/v1/users/login',
+    failureRedirect: '/loseit/api/v1/users/login',
     failureFlash:true
   })
   );
