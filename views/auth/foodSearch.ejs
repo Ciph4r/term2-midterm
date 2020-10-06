@@ -50,7 +50,7 @@
                 <h4 class="info-title">Meal for :<%= foundMeal.time%> </h4>
                 <% if (foundMeal.items.length) { %>
                  <% for( let i = 0; i < foundMeal.items.length; i++ ) { %>
-                    <form role="form" method="POST" action="/api/v1/dietPlan/remove-item/<%= foundMeal._id %>?_method=PUT">
+                    <form role="form" method="POST" action="/loseit/api/v1/dietPlan/remove-item/<%= foundMeal._id %>?_method=PUT">
     
                     <div class="row">
                         <p class="col-md-5">  <%= foundMeal.items[i].name %> </p>
@@ -66,7 +66,7 @@
 
           <div class="col-md-8 ml-auto mr-auto">
             <h2 class="title text-center"></h2>
-            <form role="form" method="GET" action="/api/v1/dietPlan/findfood">
+            <form role="form" method="GET" action="/loseit/api/v1/dietPlan/findfood">
               <div class="form-group bmd-form-group text-center ">
                   <label class="bmd-label-floating">Food Search</label>
                   <input type="hidden" name="mealId" id="mealId" value="<%= foundMeal._id%>" />
@@ -94,7 +94,7 @@
                     <h5 class="description"> Fat : <%= data.parsed[0].food.nutrients.FAT %> </h5>
                     <h5 class="description"> Protein : <%= data.parsed[0].food.nutrients.PROCNT %> </h5>
                   </div>
-                  <form role="form" method="POST" action="/api/v1/dietPlan/add-food?_method=PUT">
+                  <form role="form" method="POST" action="/loseit/api/v1/dietPlan/add-food?_method=PUT">
                     <input type="hidden" name="mealId" id="mealId" value="<%= foundMeal._id%>" />
                     <input type="hidden" name="name" id="name" value="<%= data.parsed[0].food.label %>" />
                     <input type="hidden" name="calories" id="calories" value="<%= data.parsed[0].food.nutrients.ENERC_KCAL%>" />
