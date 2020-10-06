@@ -12,7 +12,7 @@ const {userRegistrationValidation , loginValidation , goalValidation} = require(
     const errors = validationResult(req)
     if(!errors.isEmpty()){
         req.flash('errors', errors.errors[0].msg)
-        return res.redirect('/api/v1/users/login')
+        return res.redirect('/loseit/api/v1/users/login')
     }
     next()
   }
