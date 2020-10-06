@@ -70,9 +70,15 @@ app.use((req,res,next) => {
 });
 
 ////////////////
-app.use('/', indexRouter);
-app.use('/api/v1/users', usersRouter);
-app.use('/api/v1/dietPlan', dietPlanRouter);
+// app.use('/', indexRouter);
+// app.use('/api/v1/users', usersRouter);
+// app.use('/api/v1/dietPlan', dietPlanRouter);
+
+
+//////////// AWS DEPLOY
+app.use('/loseit', indexRouter);
+app.use('/loseit/api/v1/users', usersRouter);
+app.use('/loseit/api/v1/dietPlan', dietPlanRouter);
 
 
 // catch 404 and forward to error handler
